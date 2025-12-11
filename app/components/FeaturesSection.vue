@@ -35,17 +35,18 @@
       <!-- Highlight Banner -->
       <div class="features__highlight card-glass">
         <div class="features__highlight-content">
-          <div class="features__highlight-icon">🎙️</div>
+          <div class="features__highlight-icon">🔒</div>
           <div>
-            <h3>Powered by Apple Speech Recognition</h3>
+            <h3>100% Private & Local Processing</h3>
             <p>
-              Using Apple's cloud-based Speech Recognition for accurate
-              transcription. Requires internet connection for processing.
+              All transcription happens on your Mac. Choose from multiple
+              Whisper models—from tiny (fastest) to large (most accurate). Your
+              voice data never leaves your device.
             </p>
           </div>
         </div>
         <div class="features__highlight-badge">
-          <span>🍎 Built into macOS</span>
+          <span>🧠 On-Device AI</span>
         </div>
       </div>
     </div>
