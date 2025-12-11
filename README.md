@@ -3,16 +3,17 @@
 A modern landing page for [SapoWhisper](https://github.com/StevenACZ/SapoWhisper) — the privacy-first voice-to-text macOS app.
 
 ![Nuxt](https://img.shields.io/badge/Nuxt-4.x-00DC82?logo=nuxt.js)
+![Bun](https://img.shields.io/badge/Bun-1.x-fbf0df?logo=bun)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 
 ## 🚀 Quick Start
 
 ```bash
 # Install dependencies
-npm install
+bun install
 
 # Start dev server
-npm run dev
+bun run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000)
@@ -21,10 +22,10 @@ Open [http://localhost:3000](http://localhost:3000)
 
 ```bash
 # Build for production
-npm run build
+bun run build
 
 # Or generate static site
-npm run generate
+bun run generate
 ```
 
 Works with **Vercel**, **Netlify**, **Cloudflare Pages**, or any static host.
