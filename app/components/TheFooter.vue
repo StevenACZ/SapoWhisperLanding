@@ -108,7 +108,7 @@
           >
         </p>
         <p class="footer__version">
-          <span class="footer__version-badge">v1.1.0</span>
+          <span class="footer__version-badge">{{ version }}</span>
           <span>MIT License</span>
         </p>
       </div>
@@ -118,6 +118,7 @@
 
 <script setup>
 const currentYear = new Date().getFullYear();
+const { version } = useGithubRelease();
 </script>
 
 <style scoped>

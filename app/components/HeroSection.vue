@@ -83,42 +83,45 @@
       <!-- Hero Visual -->
       <div class="hero__visual animate-scale-in delay-200">
         <div class="hero__mockup">
-          <!-- Menu Bar App Preview -->
-          <div class="mockup__menubar">
-            <div class="mockup__menubar-icons">
-              <span>📶</span>
-              <span>🔋</span>
-              <span class="mockup__frog">🐸</span>
-              <span>10:42</span>
-            </div>
-          </div>
-
-          <!-- App Popup -->
-          <div class="mockup__popup animate-float">
-            <div class="mockup__popup-header">
-              <div class="mockup__popup-logo">🐸</div>
-              <span>SapoWhisper</span>
+          <!-- Floating Container - menubar and popup move together -->
+          <div class="mockup__floating-container animate-float">
+            <!-- Menu Bar App Preview -->
+            <div class="mockup__menubar">
+              <div class="mockup__menubar-icons">
+                <span>📶</span>
+                <span>🔋</span>
+                <span class="mockup__frog">🐸</span>
+                <span>10:42</span>
+              </div>
             </div>
 
-            <div class="mockup__waveform">
-              <div
-                v-for="n in 20"
-                :key="n"
-                class="mockup__wave-bar"
-                :style="{ animationDelay: `${n * 50}ms` }"
-              ></div>
-            </div>
+            <!-- App Popup -->
+            <div class="mockup__popup">
+              <div class="mockup__popup-header">
+                <div class="mockup__popup-logo">🐸</div>
+                <span>SapoWhisper</span>
+              </div>
 
-            <div class="mockup__status">
-              <div class="mockup__status-dot"></div>
-              <span>Recording...</span>
-            </div>
+              <div class="mockup__waveform">
+                <div
+                  v-for="n in 20"
+                  :key="n"
+                  class="mockup__wave-bar"
+                  :style="{ animationDelay: `${n * 50}ms` }"
+                ></div>
+              </div>
 
-            <div class="mockup__text-preview">
-              <p>
-                "Hello, this is a voice transcription demo showing how
-                SapoWhisper works..."
-              </p>
+              <div class="mockup__status">
+                <div class="mockup__status-dot"></div>
+                <span>Recording...</span>
+              </div>
+
+              <div class="mockup__text-preview">
+                <p>
+                  "Hello, this is a voice transcription demo showing how
+                  SapoWhisper works..."
+                </p>
+              </div>
             </div>
           </div>
 
@@ -314,6 +317,10 @@
   max-width: 450px;
 }
 
+.mockup__floating-container {
+  position: relative;
+}
+
 .mockup__menubar {
   background: linear-gradient(135deg, #2d2d30 0%, #1a1a1c 100%);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
@@ -332,17 +339,15 @@
 
 .mockup__frog {
   font-size: 1rem;
-  animation: bounce-subtle 2s ease-in-out infinite;
 }
 
 .mockup__popup {
   background: var(--bg-dark-secondary);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius-xl);
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
   padding: var(--spacing-xl);
   box-shadow: var(--shadow-xl), var(--shadow-glow);
   position: relative;
-  margin-top: var(--spacing-md);
 }
 
 .mockup__popup-header {
