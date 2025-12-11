@@ -1,75 +1,39 @@
-# Nuxt Minimal Starter
+# 🐸 SapoWhisper Landing Page
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A modern landing page for [SapoWhisper](https://github.com/StevenACZ/SapoWhisper) — the privacy-first voice-to-text macOS app.
 
-## Setup
+![Nuxt](https://img.shields.io/badge/Nuxt-4.x-00DC82?logo=nuxt.js)
+![License](https://img.shields.io/badge/License-MIT-blue)
 
-Make sure to install dependencies:
+## 🚀 Quick Start
 
 ```bash
-# npm
+# Install dependencies
 npm install
 
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
+# Start dev server
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+Open [http://localhost:3000](http://localhost:3000)
 
-Build the application for production:
+## 📦 Deploy
 
 ```bash
-# npm
+# Build for production
 npm run build
 
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+# Or generate static site
+npm run generate
 ```
 
-Locally preview production build:
+Works with **Vercel**, **Netlify**, **Cloudflare Pages**, or any static host.
 
-```bash
-# npm
-npm run preview
+## 🔗 Links
 
-# pnpm
-pnpm preview
+- **App Repository**: [SapoWhisper](https://github.com/StevenACZ/SapoWhisper)
+- **Releases**: [Download](https://github.com/StevenACZ/SapoWhisper/releases)
 
-# yarn
-yarn preview
+---
 
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Made with ❤️ by [@StevenACZ](https://github.com/StevenACZ)
