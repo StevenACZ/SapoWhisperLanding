@@ -39,13 +39,13 @@
           <div>
             <h3>Powered by Apple Speech Recognition</h3>
             <p>
-              Using Apple's advanced Speech Recognition technology for accurate
-              transcription. Fast, reliable, and built right into macOS.
+              Using Apple's cloud-based Speech Recognition for accurate
+              transcription. Requires internet connection for processing.
             </p>
           </div>
         </div>
         <div class="features__highlight-badge">
-          <span>🔒 Secure & Fast</span>
+          <span>🍎 Built into macOS</span>
         </div>
       </div>
     </div>
