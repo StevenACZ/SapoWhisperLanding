@@ -3,9 +3,11 @@
     <div class="navbar__container container">
       <!-- Logo -->
       <a href="#" class="navbar__logo">
-        <div class="navbar__logo-icon">
-          <span class="frog-emoji">🐸</span>
-        </div>
+        <img
+          src="/icons/icon_128x128.png"
+          alt="SapoWhisper Logo"
+          class="navbar__logo-icon"
+        />
         <span class="navbar__logo-text">SapoWhisper</span>
       </a>
 
@@ -158,16 +160,8 @@ onUnmounted(() => {
 .navbar__logo-icon {
   width: 40px;
   height: 40px;
-  background: var(--gradient-primary);
   border-radius: var(--radius-lg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--shadow-glow-sm);
-}
-
-.frog-emoji {
-  font-size: 1.25rem;
+  object-fit: cover;
 }
 
 .navbar__logo-text {

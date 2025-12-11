@@ -86,7 +86,7 @@
           <!-- Use Real App Screenshot -->
           <div class="mockup__floating-container animate-float">
             <img
-              src="/images/app-screenshot-menu.png"
+              src="/images/app-menu.png"
               alt="SapoWhisper App Interface"
               class="mockup__screenshot"
             />
@@ -95,7 +95,7 @@
           <!-- Recording Overlay (second image) -->
           <div class="mockup__recording-overlay">
             <img
-              src="/images/app-screenshot-recording.png"
+              src="/images/app-recording.png"
               alt="SapoWhisper Recording Mode"
               class="mockup__recording-img"
             />
