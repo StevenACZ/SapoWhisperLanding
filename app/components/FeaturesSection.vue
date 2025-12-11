@@ -35,17 +35,17 @@
       <!-- Highlight Banner -->
       <div class="features__highlight card-glass">
         <div class="features__highlight-content">
-          <div class="features__highlight-icon">🔒</div>
+          <div class="features__highlight-icon">🎙️</div>
           <div>
-            <h3>100% Private & Local</h3>
+            <h3>Powered by Apple Speech Recognition</h3>
             <p>
-              All transcription happens on your Mac. Your voice data never
-              leaves your device when using local mode.
+              Using Apple's advanced Speech Recognition technology for accurate
+              transcription. Fast, reliable, and built right into macOS.
             </p>
           </div>
         </div>
         <div class="features__highlight-badge">
-          <span>Coming Soon: WhisperKit Integration</span>
+          <span>🔒 Secure & Fast</span>
         </div>
       </div>
     </div>

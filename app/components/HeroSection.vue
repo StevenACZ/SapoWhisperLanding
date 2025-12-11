@@ -83,46 +83,22 @@
       <!-- Hero Visual -->
       <div class="hero__visual animate-scale-in delay-200">
         <div class="hero__mockup">
-          <!-- Floating Container - menubar and popup move together -->
+          <!-- Use Real App Screenshot -->
           <div class="mockup__floating-container animate-float">
-            <!-- Menu Bar App Preview -->
-            <div class="mockup__menubar">
-              <div class="mockup__menubar-icons">
-                <span>📶</span>
-                <span>🔋</span>
-                <span class="mockup__frog">🐸</span>
-                <span>10:42</span>
-              </div>
-            </div>
+            <img
+              src="/images/app-screenshot-menu.png"
+              alt="SapoWhisper App Interface"
+              class="mockup__screenshot"
+            />
+          </div>
 
-            <!-- App Popup -->
-            <div class="mockup__popup">
-              <div class="mockup__popup-header">
-                <div class="mockup__popup-logo">🐸</div>
-                <span>SapoWhisper</span>
-              </div>
-
-              <div class="mockup__waveform">
-                <div
-                  v-for="n in 20"
-                  :key="n"
-                  class="mockup__wave-bar"
-                  :style="{ animationDelay: `${n * 50}ms` }"
-                ></div>
-              </div>
-
-              <div class="mockup__status">
-                <div class="mockup__status-dot"></div>
-                <span>Recording...</span>
-              </div>
-
-              <div class="mockup__text-preview">
-                <p>
-                  "Hello, this is a voice transcription demo showing how
-                  SapoWhisper works..."
-                </p>
-              </div>
-            </div>
+          <!-- Recording Overlay (second image) -->
+          <div class="mockup__recording-overlay">
+            <img
+              src="/images/app-screenshot-recording.png"
+              alt="SapoWhisper Recording Mode"
+              class="mockup__recording-img"
+            />
           </div>
 
           <!-- Decorative Elements -->
@@ -291,8 +267,10 @@
 /* CTA Buttons */
 .hero__cta {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  gap: var(--spacing-md);
+  align-items: center;
+  gap: var(--spacing-lg);
   margin-bottom: var(--spacing-lg);
 }
 
@@ -314,100 +292,36 @@
 .hero__mockup {
   position: relative;
   width: 100%;
-  max-width: 450px;
+  max-width: 500px;
 }
 
 .mockup__floating-container {
   position: relative;
+  z-index: 2;
 }
 
-.mockup__menubar {
-  background: linear-gradient(135deg, #2d2d30 0%, #1a1a1c 100%);
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  padding: var(--spacing-sm) var(--spacing-lg);
-  display: flex;
-  justify-content: flex-end;
-}
-
-.mockup__menubar-icons {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-  font-size: 0.75rem;
-  color: var(--color-neutral-300);
-}
-
-.mockup__frog {
-  font-size: 1rem;
-}
-
-.mockup__popup {
-  background: var(--bg-dark-secondary);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
-  padding: var(--spacing-xl);
+.mockup__screenshot {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-xl);
   box-shadow: var(--shadow-xl), var(--shadow-glow);
-  position: relative;
 }
 
-.mockup__popup-header {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  font-weight: 600;
-  font-size: 1.125rem;
-  margin-bottom: var(--spacing-lg);
+.mockup__recording-overlay {
+  position: absolute;
+  bottom: -20px;
+  right: -60px;
+  width: 200px;
+  z-index: 3;
+  animation: float 6s ease-in-out infinite;
+  animation-delay: 0.5s;
 }
 
-.mockup__popup-logo {
-  font-size: 1.5rem;
-}
-
-.mockup__waveform {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  height: 60px;
-  margin-bottom: var(--spacing-lg);
-}
-
-.mockup__wave-bar {
-  width: 4px;
-  height: 20%;
-  background: var(--color-primary-500);
-  border-radius: var(--radius-full);
-  animation: waveform 1s ease-in-out infinite;
-}
-
-.mockup__status {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  font-size: 0.875rem;
-  color: var(--color-primary-400);
-  margin-bottom: var(--spacing-lg);
-}
-
-.mockup__status-dot {
-  width: 8px;
-  height: 8px;
-  background: var(--color-primary-500);
-  border-radius: var(--radius-full);
-  animation: pulse-glow 1.5s ease-in-out infinite;
-}
-
-.mockup__text-preview {
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: var(--radius-md);
-  padding: var(--spacing-md);
-}
-
-.mockup__text-preview p {
-  font-size: 0.9375rem;
-  color: var(--color-neutral-300);
-  font-style: italic;
-  line-height: 1.5;
+.mockup__recording-img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
 }
 
 .mockup__decoration {
