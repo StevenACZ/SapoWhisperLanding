@@ -24,7 +24,7 @@
         <!-- Subtitle -->
         <p class="hero__subtitle animate-fade-in-up delay-200">
           A powerful macOS menu bar app that captures your voice and converts it
-          to text with a single hotkey. Fast, private, and always ready.
+          to text with a single hotkey. Fast, reliable, and always ready.
         </p>
 
         <!-- Hotkey Demo -->
