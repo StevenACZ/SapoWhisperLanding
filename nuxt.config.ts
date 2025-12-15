@@ -32,10 +32,10 @@ export default defineNuxtConfig({
           content: "Transform your voice into text instantly with SapoWhisper.",
         },
         { property: "og:type", content: "website" },
-        { property: "og:url", content: "https://sapowhisper.vercel.app/" },
+        { property: "og:url", content: "https://sapo.stevenacz.com/" },
         {
           property: "og:image",
-          content: "https://sapowhisper.vercel.app/og-image.png",
+          content: "https://sapo.stevenacz.com/og-image.png",
         },
         { property: "og:site_name", content: "SapoWhisper" },
         { property: "og:locale", content: "en_US" },
@@ -51,7 +51,7 @@ export default defineNuxtConfig({
         },
         {
           name: "twitter:image",
-          content: "https://sapowhisper.vercel.app/og-image.png",
+          content: "https://sapo.stevenacz.com/og-image.png",
         },
         // Other
         { name: "theme-color", content: "#10B981" },
@@ -59,7 +59,7 @@ export default defineNuxtConfig({
         { name: "robots", content: "index, follow" },
       ],
       link: [
-        { rel: "canonical", href: "https://sapowhisper.vercel.app/" },
+        { rel: "canonical", href: "https://sapo.stevenacz.com/" },
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
         {
           rel: "icon",

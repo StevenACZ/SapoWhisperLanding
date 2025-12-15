@@ -1,8 +1,8 @@
 # SapoWhisper Landing Page - robots.txt
-# https://sapowhisper.vercel.app/
+# https://sapo.stevenacz.com/
 
 User-Agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://sapowhisper.vercel.app/sitemap.xml
+Sitemap: https://sapo.stevenacz.com/sitemap.xml
