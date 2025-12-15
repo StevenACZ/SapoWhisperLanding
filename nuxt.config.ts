@@ -5,6 +5,9 @@ export default defineNuxtConfig({
 
   app: {
     head: {
+      htmlAttrs: {
+        lang: "en",
+      },
       title: "SapoWhisper - Voice to Text for macOS",
       meta: [
         { charset: "utf-8" },
@@ -19,6 +22,7 @@ export default defineNuxtConfig({
           content:
             "voice to text, macOS, transcription, speech recognition, whisper, menu bar app, productivity",
         },
+        // Open Graph
         {
           property: "og:title",
           content: "SapoWhisper - Voice to Text for macOS",
@@ -28,11 +32,34 @@ export default defineNuxtConfig({
           content: "Transform your voice into text instantly with SapoWhisper.",
         },
         { property: "og:type", content: "website" },
-        { property: "og:image", content: "/og-image.png" },
+        { property: "og:url", content: "https://sapowhisper.vercel.app/" },
+        {
+          property: "og:image",
+          content: "https://sapowhisper.vercel.app/og-image.png",
+        },
+        { property: "og:site_name", content: "SapoWhisper" },
+        { property: "og:locale", content: "en_US" },
+        // Twitter Card
         { name: "twitter:card", content: "summary_large_image" },
+        {
+          name: "twitter:title",
+          content: "SapoWhisper - Voice to Text for macOS",
+        },
+        {
+          name: "twitter:description",
+          content: "Transform your voice into text instantly with SapoWhisper.",
+        },
+        {
+          name: "twitter:image",
+          content: "https://sapowhisper.vercel.app/og-image.png",
+        },
+        // Other
         { name: "theme-color", content: "#10B981" },
+        { name: "author", content: "StevenACZ" },
+        { name: "robots", content: "index, follow" },
       ],
       link: [
+        { rel: "canonical", href: "https://sapowhisper.vercel.app/" },
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
         {
           rel: "icon",
