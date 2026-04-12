@@ -1,443 +1,520 @@
 <template>
   <section class="hero">
-    <!-- Background Effects -->
-    <div class="hero__bg">
-      <div class="hero__gradient"></div>
+    <div class="hero__backdrop">
+      <div class="hero__orb hero__orb--left"></div>
+      <div class="hero__orb hero__orb--right"></div>
       <div class="hero__grid"></div>
-      <div class="hero__glow"></div>
     </div>
 
     <div class="hero__container container">
       <div class="hero__content">
-        <!-- Badge -->
         <div class="hero__badge animate-fade-in-up">
-          <span class="hero__badge-icon">✨</span>
-          <span>Open Source • Free Forever</span>
+          <span>macOS native</span>
+          <span>Local or cloud</span>
         </div>
 
-        <!-- Title -->
         <h1 class="hero__title animate-fade-in-up delay-100">
-          Transform Your Voice<br />
-          Into <span class="text-gradient">Text Instantly</span>
+          Native dictation
+          <span class="text-gradient">for macOS</span>
         </h1>
 
-        <!-- Subtitle -->
         <p class="hero__subtitle animate-fade-in-up delay-200">
-          A powerful macOS menu bar app that captures your voice and converts it
-          to text with a single hotkey. Fast, private, and always ready.
+          Trigger recording from anywhere, transcribe with the engine you
+          prefer, paste instantly, and keep every transcript in a searchable
+          history.
         </p>
 
-        <!-- Hotkey Demo -->
-        <div class="hero__hotkey animate-fade-in-up delay-300">
-          <span class="hero__hotkey-label">Press</span>
-          <div class="hero__hotkey-keys">
-            <kbd class="hero__key">⌥</kbd>
-            <span class="hero__key-plus">+</span>
-            <kbd class="hero__key">Space</kbd>
-          </div>
-          <span class="hero__hotkey-label">to start recording</span>
-        </div>
-
-        <!-- CTA Buttons -->
-        <div class="hero__cta animate-fade-in-up delay-400">
-          <a href="#download" class="btn btn-primary btn-lg">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-            Download for macOS
-          </a>
-          <a href="#how-it-works" class="btn btn-secondary btn-lg">
-            See How It Works
-          </a>
-        </div>
-
-        <!-- Platform Info -->
-        <p class="hero__platform animate-fade-in-up delay-500">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="currentColor"
+        <div class="hero__actions animate-fade-in-up delay-300">
+          <a href="#download" class="btn btn-primary btn-lg"
+            >Download for macOS</a
           >
-            <path
-              d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
-            />
-          </svg>
-          Requires macOS 12.0+ (Monterey or later)
-        </p>
-      </div>
+          <a
+            href="https://github.com/StevenACZ/SapoWhisper"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-secondary btn-lg"
+          >
+            View on GitHub
+          </a>
+        </div>
 
-      <!-- Hero Visual -->
-      <div class="hero__visual animate-scale-in delay-200">
-        <div class="hero__mockup">
-          <!-- Use Real App Screenshot -->
-          <div class="mockup__floating-container animate-float">
-            <img
-              src="/images/app-menu.png"
-              alt="SapoWhisper App Interface"
-              class="mockup__screenshot"
-            />
+        <div class="hero__meta animate-fade-in-up delay-400">
+          <div class="hero__shortcut">
+            <span>Press</span>
+            <kbd>⌥</kbd>
+            <span>+</span>
+            <kbd>Space</kbd>
+            <span>to start dictating</span>
           </div>
 
-          <!-- Recording Overlay (second image) -->
-          <div class="mockup__recording-overlay">
-            <img
-              src="/images/app-recording.png"
-              alt="SapoWhisper Recording Mode"
-              class="mockup__recording-img"
-            />
+          <div class="hero__microproof">
+            <span v-for="(item, index) in proofItems" :key="item">
+              {{ item
+              }}<template v-if="index < proofItems.length - 1"> · </template>
+            </span>
           </div>
-
-          <!-- Decorative Elements -->
-          <div class="mockup__decoration mockup__decoration--1"></div>
-          <div class="mockup__decoration mockup__decoration--2"></div>
         </div>
       </div>
-    </div>
 
-    <!-- Scroll Indicator -->
-    <div class="hero__scroll">
-      <div class="hero__scroll-mouse">
-        <div class="hero__scroll-wheel"></div>
+      <div class="hero__visual animate-scale-in delay-200">
+        <div class="hero__mockup card-glass">
+          <div class="hero__window-bar">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <div class="hero__mockup-header">
+            <div>
+              <small class="hero__eyebrow">What SapoWhisper does</small>
+              <h3>Record, transcribe, paste.</h3>
+            </div>
+            <div class="hero__engine-chip">Deepgram · Fast</div>
+          </div>
+
+          <div class="hero__steps">
+            <div class="hero__step">
+              <div class="hero__step-number">1</div>
+              <div>
+                <strong>Start with a shortcut</strong>
+                <p>Trigger recording from anywhere on your Mac.</p>
+              </div>
+            </div>
+
+            <div class="hero__step">
+              <div class="hero__step-number">2</div>
+              <div>
+                <strong>Speak naturally</strong>
+                <p>Use your preferred mic and watch the live audio feedback.</p>
+              </div>
+            </div>
+
+            <div class="hero__step">
+              <div class="hero__step-number">3</div>
+              <div>
+                <strong>Paste or revisit later</strong>
+                <p>Send the result instantly and keep it in History.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero__recording card-glass">
+            <div class="hero__recording-head">
+              <span class="hero__status-dot"></span>
+              Recording active
+              <strong>00:18</strong>
+            </div>
+
+            <div class="hero__waveform" aria-hidden="true">
+              <span v-for="bar in 20" :key="bar"></span>
+            </div>
+
+            <p class="hero__transcript-text">
+              “Can you send the updated launch copy before lunch?”
+            </p>
+          </div>
+
+          <div class="hero__summary-grid">
+            <div class="hero__summary-card">
+              <small>Output</small>
+              <strong>Auto-paste enabled</strong>
+              <p>
+                Drop the result directly into the app you are already using.
+              </p>
+            </div>
+
+            <div class="hero__summary-card">
+              <small>History</small>
+              <strong>Search previous transcripts</strong>
+              <p>Replay audio, pin entries, and re-transcribe later.</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <span>Scroll to explore</span>
     </div>
   </section>
 </template>
 
+<script setup>
+const proofItems = ["Global hotkey", "Auto-paste", "Searchable History"];
+</script>
+
 <style scoped>
 .hero {
   position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  padding-top: 80px;
+  padding: 8.5rem 0 7rem;
   overflow: hidden;
 }
 
-/* Background Effects */
-.hero__bg {
+.hero__backdrop {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  overflow: hidden;
 }
 
-.hero__gradient {
+.hero__orb {
   position: absolute;
-  top: -50%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 150%;
-  height: 100%;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(16, 185, 129, 0.08) 0%,
-    transparent 60%
-  );
+  border-radius: 999px;
+  filter: blur(70px);
+}
+
+.hero__orb--left {
+  top: 4rem;
+  left: -4rem;
+  width: 20rem;
+  height: 20rem;
+  background: rgba(16, 185, 129, 0.12);
+}
+
+.hero__orb--right {
+  top: 8rem;
+  right: 3rem;
+  width: 24rem;
+  height: 24rem;
+  background: rgba(59, 130, 246, 0.08);
 }
 
 .hero__grid {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(
-      rgba(255, 255, 255, 0.02) 1px,
-      transparent 1px
-    ),
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 60px 60px;
-  mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
-}
-
-.hero__glow {
-  position: absolute;
-  top: 20%;
-  right: 15%;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(
-    circle,
-    rgba(16, 185, 129, 0.1) 0%,
-    transparent 70%
+  background-size: 64px 64px;
+  mask-image: radial-gradient(
+    circle at center,
+    rgba(0, 0, 0, 1),
+    transparent 78%
   );
-  filter: blur(60px);
 }
 
-/* Container */
 .hero__container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-4xl);
-  align-items: center;
   position: relative;
   z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.02fr);
+  gap: var(--spacing-4xl);
+  align-items: center;
 }
 
-/* Content */
 .hero__content {
-  max-width: 600px;
+  max-width: 580px;
 }
 
 .hero__badge {
   display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-sm) var(--spacing-md);
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(16, 185, 129, 0.2);
-  border-radius: var(--radius-full);
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--color-primary-400);
+  flex-wrap: wrap;
+  gap: 0.65rem;
   margin-bottom: var(--spacing-xl);
 }
 
-.hero__badge-icon {
-  font-size: 1rem;
+.hero__badge span {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--color-neutral-200);
+  font-size: 0.85rem;
+  font-weight: 600;
 }
 
 .hero__title {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  font-size: clamp(3rem, 6vw, 5rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
   margin-bottom: var(--spacing-lg);
+}
+
+.hero__title span {
+  display: block;
 }
 
 .hero__subtitle {
   font-size: 1.125rem;
+  line-height: 1.8;
   color: var(--color-neutral-400);
-  line-height: 1.7;
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: var(--spacing-2xl);
 }
 
-/* Hotkey Demo */
-.hero__hotkey {
+.hero__actions {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   gap: var(--spacing-md);
   margin-bottom: var(--spacing-2xl);
 }
 
-.hero__hotkey-label {
-  font-size: 0.875rem;
-  color: var(--color-neutral-500);
+.hero__meta {
+  display: grid;
+  gap: var(--spacing-lg);
 }
 
-.hero__hotkey-keys {
-  display: flex;
+.hero__shortcut {
+  display: inline-flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  color: var(--color-neutral-300);
 }
 
-.hero__key {
+.hero__shortcut kbd {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-sm) var(--spacing-md);
-  background: var(--bg-dark-tertiary);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius-md);
-  font-family: var(--font-family);
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--color-neutral-200);
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  min-width: 3rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: 0.9rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--color-neutral-100);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-.hero__key-plus {
-  color: var(--color-neutral-500);
-  font-weight: 500;
-}
-
-/* CTA Buttons */
-.hero__cta {
+.hero__microproof {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  align-items: center;
-  gap: var(--spacing-lg);
-  margin-bottom: var(--spacing-lg);
+  gap: 0.2rem;
+  color: var(--color-neutral-400);
+  font-size: 0.9rem;
 }
 
-.hero__platform {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  font-size: 0.875rem;
-  color: var(--color-neutral-500);
-}
-
-/* Visual / Mockup */
-.hero__visual {
-  position: relative;
-  display: flex;
-  justify-content: center;
+.hero__microproof span {
+  color: inherit;
 }
 
 .hero__mockup {
-  position: relative;
-  width: 100%;
-  max-width: 500px;
-}
-
-.mockup__floating-container {
-  position: relative;
-  z-index: 2;
-}
-
-.mockup__screenshot {
-  width: 100%;
-  height: auto;
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-xl), var(--shadow-glow);
-}
-
-.mockup__recording-overlay {
-  position: absolute;
-  bottom: -20px;
-  right: -60px;
-  width: 200px;
-  z-index: 3;
-  animation: float 6s ease-in-out infinite;
-  animation-delay: 0.5s;
-}
-
-.mockup__recording-img {
-  width: 100%;
-  height: auto;
-  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border-radius: 28px;
+  background: rgba(11, 13, 16, 0.82);
   box-shadow: var(--shadow-xl);
 }
 
-.mockup__decoration {
-  position: absolute;
-  border-radius: var(--radius-full);
-  background: var(--color-primary-500);
-  filter: blur(40px);
-  opacity: 0.3;
-}
-
-.mockup__decoration--1 {
-  width: 150px;
-  height: 150px;
-  top: -50px;
-  right: -50px;
-}
-
-.mockup__decoration--2 {
-  width: 100px;
-  height: 100px;
-  bottom: -30px;
-  left: -30px;
-  background: var(--color-accent-purple);
-}
-
-/* Scroll Indicator */
-.hero__scroll {
-  position: absolute;
-  bottom: var(--spacing-2xl);
-  left: 50%;
-  transform: translateX(-50%);
+.hero__window-bar {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-sm);
-  opacity: 0.6;
-  animation: bounce-subtle 2s ease-in-out infinite;
+  gap: 0.5rem;
+  padding: 0.9rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.hero__scroll-mouse {
-  width: 24px;
-  height: 40px;
-  border: 2px solid var(--color-neutral-500);
-  border-radius: 12px;
+.hero__window-bar span {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.hero__mockup-header {
   display: flex;
-  justify-content: center;
-  padding-top: 8px;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: start;
+  padding: 1.3rem 1.3rem 1rem;
 }
 
-.hero__scroll-wheel {
-  width: 4px;
-  height: 8px;
-  background: var(--color-neutral-400);
-  border-radius: var(--radius-full);
-  animation: fade-in-up 1.5s ease-in-out infinite;
-}
-
-.hero__scroll span {
-  font-size: 0.75rem;
+.hero__eyebrow,
+.hero__summary-card small {
   color: var(--color-neutral-500);
-  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
+.hero__mockup-header h3 {
+  margin-top: 0.3rem;
+  font-size: 1.6rem;
+  line-height: 1.15;
+}
+
+.hero__engine-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.18);
+  color: #93c5fd;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.hero__steps {
+  display: grid;
+  gap: 0.8rem;
+  padding: 0 1.3rem 1rem;
+}
+
+.hero__step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.9rem;
+  align-items: start;
+  padding: 0.95rem 1rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.hero__step-number {
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--color-primary-300);
+  font-weight: 700;
+}
+
+.hero__step strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.98rem;
+}
+
+.hero__step p {
+  color: var(--color-neutral-400);
+  line-height: 1.6;
+  font-size: 0.92rem;
+}
+
+.hero__recording {
+  margin: 0 1.3rem 1rem;
+  padding: 1rem;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.hero__recording-head {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 0.85rem;
+  color: var(--color-neutral-300);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.hero__recording-head strong {
+  margin-left: auto;
+  color: var(--color-neutral-100);
+}
+
+.hero__status-dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 999px;
+  background: var(--color-primary-400);
+  box-shadow: 0 0 14px rgba(52, 211, 153, 0.9);
+}
+
+.hero__waveform {
+  display: flex;
+  align-items: end;
+  gap: 0.22rem;
+  height: 56px;
+  margin-bottom: 0.85rem;
+}
+
+.hero__waveform span {
+  flex: 1;
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    rgba(52, 211, 153, 0.95),
+    rgba(59, 130, 246, 0.4)
+  );
+  animation: hero-wave 1.3s ease-in-out infinite;
+}
+
+.hero__waveform span:nth-child(odd) {
+  animation-delay: 0.15s;
+}
+
+.hero__waveform span:nth-child(3n) {
+  animation-delay: 0.3s;
+}
+
+.hero__transcript-text {
+  color: var(--color-neutral-200);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.hero__summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+  padding: 0 1.3rem 1.3rem;
+}
+
+.hero__summary-card {
+  padding: 0.95rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.hero__summary-card strong {
+  display: block;
+  margin: 0.4rem 0 0.45rem;
+  font-size: 0.98rem;
+}
+
+.hero__summary-card p {
+  color: var(--color-neutral-400);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+@keyframes hero-wave {
+  0%,
+  100% {
+    height: 20%;
+  }
+  50% {
+    height: 100%;
+  }
+}
+
+@media (max-width: 1100px) {
   .hero__container {
     grid-template-columns: 1fr;
-    text-align: center;
   }
 
   .hero__content {
     max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .hero__hotkey {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .hero__cta {
-    justify-content: center;
-  }
-
-  .hero__visual {
-    order: -1;
-    margin-bottom: var(--spacing-2xl);
-  }
-
-  .hero__mockup {
-    max-width: 380px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .hero {
-    padding-top: 100px;
+    padding: 7.5rem 0 5rem;
   }
 
-  .hero__title {
-    font-size: 2rem;
-  }
-
-  .hero__cta {
+  .hero__actions {
     flex-direction: column;
+  }
+
+  .hero__actions :deep(.btn) {
     width: 100%;
   }
 
-  .hero__cta .btn {
-    width: 100%;
+  .hero__mockup-header,
+  .hero__summary-grid {
+    grid-template-columns: 1fr;
   }
 
-  .hero__scroll {
-    display: none;
+  .hero__mockup-header {
+    flex-direction: column;
+  }
+
+  .hero__summary-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>

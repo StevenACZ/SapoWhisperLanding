@@ -8,28 +8,28 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: "en",
       },
-      title: "SapoWhisper - Voice to Text for macOS",
+      title: "SapoWhisper — Native Dictation for macOS",
       meta: [
         { charset: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
         {
           name: "description",
           content:
-            "Transform your voice into text instantly with SapoWhisper. A powerful macOS menu bar app for seamless voice transcription with global hotkeys.",
+            "A macOS menu bar app for fast dictation. Trigger recording with a shortcut, transcribe with local or cloud engines, paste instantly, and keep everything in History.",
         },
         {
           name: "keywords",
           content:
-            "voice to text, macOS, transcription, speech recognition, whisper, menu bar app, productivity",
+            "macOS dictation, voice typing mac, speech to text macOS, menu bar dictation, mac transcription app, whisper macOS, voice workflow",
         },
-        // Open Graph
         {
           property: "og:title",
-          content: "SapoWhisper - Voice to Text for macOS",
+          content: "SapoWhisper — Native Dictation for macOS",
         },
         {
           property: "og:description",
-          content: "Transform your voice into text instantly with SapoWhisper.",
+          content:
+            "Trigger recording from anywhere, transcribe with the engine you prefer, paste instantly, and revisit every transcript later.",
         },
         { property: "og:type", content: "website" },
         { property: "og:url", content: "https://sapo.stevenacz.com/" },
@@ -39,21 +39,20 @@ export default defineNuxtConfig({
         },
         { property: "og:site_name", content: "SapoWhisper" },
         { property: "og:locale", content: "en_US" },
-        // Twitter Card
         { name: "twitter:card", content: "summary_large_image" },
         {
           name: "twitter:title",
-          content: "SapoWhisper - Voice to Text for macOS",
+          content: "SapoWhisper — Native Dictation for macOS",
         },
         {
           name: "twitter:description",
-          content: "Transform your voice into text instantly with SapoWhisper.",
+          content:
+            "Fast dictation for macOS with global hotkeys, local or cloud engines, auto-paste, and searchable History.",
         },
         {
           name: "twitter:image",
           content: "https://sapo.stevenacz.com/og-image.png",
         },
-        // Other
         { name: "theme-color", content: "#10B981" },
         { name: "author", content: "StevenACZ" },
         { name: "robots", content: "index, follow" },
@@ -86,7 +85,7 @@ export default defineNuxtConfig({
         },
         {
           rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap",
+          href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap",
         },
       ],
     },

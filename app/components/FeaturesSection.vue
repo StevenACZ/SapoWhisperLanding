@@ -1,52 +1,54 @@
 <template>
   <section id="features" class="features section">
     <div class="container">
-      <!-- Section Header -->
       <div class="features__header">
         <span class="features__label">Features</span>
         <h2 class="features__title">
-          Everything you need for<br />
-          <span class="text-gradient">seamless voice input</span>
+          Built around the
+          <span class="text-gradient">real dictation workflow</span>
         </h2>
         <p class="features__description">
-          SapoWhisper is designed to be fast, unobtrusive, and incredibly easy
-          to use. No complicated setup, just speak and paste.
+          SapoWhisper is no longer just a speech-to-text shortcut. It is a
+          native macOS workflow for recording, transcribing, pasting,
+          revisiting, and refining what you said.
         </p>
       </div>
 
-      <!-- Features Grid -->
       <div class="features__grid">
-        <div
-          v-for="(feature, index) in features"
-          :key="index"
+        <article
+          v-for="feature in features"
+          :key="feature.title"
           class="feature-card card"
         >
-          <div
-            class="feature-card__icon"
-            :style="{ background: feature.gradient }"
-          >
-            <span>{{ feature.emoji }}</span>
+          <div class="feature-card__top">
+            <div
+              class="feature-card__icon"
+              :style="{ background: feature.gradient }"
+            >
+              <span>{{ feature.emoji }}</span>
+            </div>
+            <span class="feature-card__tag">{{ feature.tag }}</span>
           </div>
           <h3 class="feature-card__title">{{ feature.title }}</h3>
           <p class="feature-card__description">{{ feature.description }}</p>
-        </div>
+        </article>
       </div>
 
-      <!-- Highlight Banner -->
       <div class="features__highlight card-glass">
-        <div class="features__highlight-content">
-          <div class="features__highlight-icon">🔒</div>
-          <div>
-            <h3>100% Private & Local Processing</h3>
-            <p>
-              All transcription happens on your Mac. Choose from multiple
-              Whisper models—from tiny (fastest) to large (most accurate). Your
-              voice data never leaves your device.
-            </p>
-          </div>
+        <div>
+          <span class="features__highlight-label">Engine flexibility</span>
+          <h3>Privacy when you want it. Cloud accuracy when you need it.</h3>
+          <p>
+            Go fully local with WhisperKit, or connect your own Google Cloud or
+            Deepgram credentials when you want cloud transcription.
+          </p>
         </div>
-        <div class="features__highlight-badge">
-          <span>🧠 On-Device AI</span>
+
+        <div class="features__engine-list">
+          <span>WhisperKit local</span>
+          <span>Apple Speech</span>
+          <span>Google Cloud</span>
+          <span>Deepgram</span>
         </div>
       </div>
     </div>
@@ -57,45 +59,51 @@
 const features = [
   {
     emoji: "⚡",
-    title: "Lightning Fast",
+    tag: "Fast to trigger",
+    title: "Record from anywhere",
     description:
-      "Start recording instantly with a global hotkey. No app switching, no delays—just press and speak.",
+      "Launch dictation with a global shortcut and start speaking without switching away from the app you are already using.",
     gradient: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
   },
   {
-    emoji: "🎯",
-    title: "Global Hotkey",
+    emoji: "🧠",
+    tag: "Flexible engines",
+    title: "Pick the transcription engine",
     description:
-      "Access SapoWhisper from anywhere with ⌥ + Space. Works in any app, any window, any time.",
-    gradient: "linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)",
+      "Choose the engine that fits the task: local privacy, simple online dictation, or stronger cloud recognition when accuracy matters.",
+    gradient: "linear-gradient(135deg, #10b981 0%, #047857 100%)",
   },
   {
     emoji: "📋",
-    title: "Auto-Paste",
+    tag: "Immediate output",
+    title: "Paste instantly",
     description:
-      "Transcribed text is automatically copied to your clipboard and pasted where you need it.",
+      "Auto-copy and auto-paste keep your cursor moving so dictation feels like part of your writing flow, not a separate tool.",
     gradient: "linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)",
   },
   {
-    emoji: "🎨",
-    title: "Beautiful UI",
+    emoji: "🗂️",
+    tag: "Keep the context",
+    title: "Searchable History",
     description:
-      "A sleek, native macOS design with smooth animations and an intuitive interface.",
-    gradient: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
+      "Search older transcripts, pin important entries, replay audio, and come back later without losing what you dictated.",
+    gradient: "linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)",
   },
   {
-    emoji: "🔊",
-    title: "Audio Feedback",
+    emoji: "🎙️",
+    tag: "Audio control",
+    title: "Built for daily microphone use",
     description:
-      "Subtle sound cues let you know when recording starts and stops without looking at the screen.",
+      "Preferred microphone sync, mic test, gain controls, audio cues, and auto-ducking make the recording experience more reliable.",
     gradient: "linear-gradient(135deg, #ec4899 0%, #be185d 100%)",
   },
   {
-    emoji: "🛠️",
-    title: "Open Source",
+    emoji: "🪄",
+    tag: "Polished workflow",
+    title: "Refine instead of repeating",
     description:
-      "Fully open source and free forever. Inspect the code, contribute, or customize it for your needs.",
-    gradient: "linear-gradient(135deg, #6366f1 0%, #4338ca 100%)",
+      "Pause and resume, retry with another engine, download the audio, and keep improving the result without re-recording everything.",
+    gradient: "linear-gradient(135deg, #14b8a6 0%, #0f766e 100%)",
   },
 ];
 </script>
@@ -106,136 +114,135 @@ const features = [
 }
 
 .features__header {
-  text-align: center;
-  max-width: 700px;
+  max-width: 760px;
   margin: 0 auto var(--spacing-4xl);
+  text-align: center;
 }
 
-.features__label {
+.features__label,
+.features__highlight-label {
   display: inline-block;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-primary-400);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
   margin-bottom: var(--spacing-md);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-primary-300);
 }
 
 .features__title {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 800;
-  line-height: 1.2;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.08;
   margin-bottom: var(--spacing-lg);
 }
 
 .features__description {
-  font-size: 1.125rem;
   color: var(--color-neutral-400);
-  line-height: 1.7;
+  font-size: 1.06rem;
+  line-height: 1.8;
 }
 
-/* Features Grid */
 .features__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--spacing-xl);
-  margin-bottom: var(--spacing-4xl);
+  margin-bottom: var(--spacing-3xl);
 }
 
 .feature-card {
-  text-align: center;
-  padding: var(--spacing-2xl) var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding: var(--spacing-xl);
+  text-align: left;
+}
+
+.feature-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
 }
 
 .feature-card__icon {
-  width: 64px;
-  height: 64px;
-  border-radius: var(--radius-xl);
-  display: flex;
+  width: 58px;
+  height: 58px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto var(--spacing-lg);
-  font-size: 1.75rem;
+  border-radius: 18px;
   box-shadow: var(--shadow-md);
+  font-size: 1.4rem;
+}
+
+.feature-card__tag {
+  font-size: 0.8rem;
+  color: var(--color-neutral-500);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .feature-card__title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: var(--spacing-sm);
+  font-size: 1.2rem;
+  line-height: 1.35;
 }
 
 .feature-card__description {
-  font-size: 0.9375rem;
   color: var(--color-neutral-400);
-  line-height: 1.6;
+  line-height: 1.75;
 }
 
-/* Highlight Banner */
 .features__highlight {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: var(--spacing-2xl);
   align-items: center;
-  padding: var(--spacing-xl) var(--spacing-2xl);
-  border-radius: var(--radius-2xl);
+  padding: var(--spacing-2xl);
+  border-radius: 28px;
   background: linear-gradient(
     135deg,
-    rgba(16, 185, 129, 0.08) 0%,
-    rgba(139, 92, 246, 0.08) 100%
+    rgba(16, 185, 129, 0.08),
+    rgba(59, 130, 246, 0.06)
   );
 }
 
-.features__highlight-content {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-lg);
+.features__highlight h3 {
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  line-height: 1.2;
+  margin-bottom: 0.8rem;
 }
 
-.features__highlight-icon {
-  font-size: 2.5rem;
-}
-
-.features__highlight-content h3 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: var(--spacing-xs);
-}
-
-.features__highlight-content p {
-  font-size: 0.9375rem;
+.features__highlight p {
   color: var(--color-neutral-400);
-  max-width: 500px;
+  line-height: 1.75;
 }
 
-.features__highlight-badge {
-  background: rgba(139, 92, 246, 0.2);
-  border: 1px solid rgba(139, 92, 246, 0.3);
-  border-radius: var(--radius-full);
-  padding: var(--spacing-sm) var(--spacing-lg);
-  font-size: 0.875rem;
+.features__engine-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.features__engine-list span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-xl);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--color-neutral-200);
   font-weight: 600;
-  color: #a78bfa;
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
   .features__grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .features__highlight {
-    flex-direction: column;
-    text-align: center;
-    gap: var(--spacing-lg);
-  }
-
-  .features__highlight-content {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .features__highlight-content p {
-    max-width: 100%;
+    grid-template-columns: 1fr;
   }
 }
 

@@ -2,7 +2,7 @@
  * Composable to fetch the latest release version from GitHub API
  */
 export const useGithubRelease = () => {
-  const version = ref("v1.1.0"); // Fallback version
+  const version = ref("v1.3.0");
   const loading = ref(true);
   const error = ref<string | null>(null);
 
@@ -17,7 +17,7 @@ export const useGithubRelease = () => {
           headers: {
             Accept: "application/vnd.github.v3+json",
           },
-        }
+        },
       );
 
       if (!response.ok) {
@@ -32,13 +32,11 @@ export const useGithubRelease = () => {
     } catch (e) {
       error.value = e instanceof Error ? e.message : "Failed to fetch release";
       console.warn("Failed to fetch GitHub release:", error.value);
-      // Keep fallback version
     } finally {
       loading.value = false;
     }
   };
 
-  // Fetch on client-side only
   onMounted(() => {
     fetchLatestRelease();
   });

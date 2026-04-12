@@ -1,6 +1,6 @@
 # 🐸 SapoWhisper Landing Page
 
-A modern landing page for [SapoWhisper](https://github.com/StevenACZ/SapoWhisper) — the privacy-first voice-to-text macOS app.
+Marketing site for [SapoWhisper](https://github.com/StevenACZ/SapoWhisper) — a native dictation app for macOS with global hotkeys, flexible transcription engines, instant paste, and searchable History.
 
 ![Nuxt](https://img.shields.io/badge/Nuxt-4.x-00DC82?logo=nuxt.js)
 ![Bun](https://img.shields.io/badge/Bun-1.x-fbf0df?logo=bun)
@@ -9,31 +9,37 @@ A modern landing page for [SapoWhisper](https://github.com/StevenACZ/SapoWhisper
 ## 🚀 Quick Start
 
 ```bash
-# Install dependencies
 bun install
-
-# Start dev server
 bun run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
+Open http://localhost:3000
 
-## 📦 Deploy
+## 📦 Build
 
 ```bash
-# Build for production
-bun run build
-
-# Or generate static site
 bun run generate
+# or
+bun run build
 ```
 
-Works with **Vercel**, **Netlify**, **Cloudflare Pages**, or any static host.
+## 🌐 Deployment
+
+This landing is generated as a static site and deployed from GitHub Actions to the VPS using repository secrets.
+
+Required secrets:
+
+- `SSH_HOST`
+- `SSH_USER`
+- `SSH_PRIVATE_KEY`
+- `SSH_PORT`
+- `DEPLOY_PATH`
 
 ## 🔗 Links
 
-- **App Repository**: [SapoWhisper](https://github.com/StevenACZ/SapoWhisper)
-- **Releases**: [Download](https://github.com/StevenACZ/SapoWhisper/releases)
+- App repository: https://github.com/StevenACZ/SapoWhisper
+- Releases: https://github.com/StevenACZ/SapoWhisper/releases
+- Live site: https://sapo.stevenacz.com/
 
 ---
 
