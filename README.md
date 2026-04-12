@@ -25,15 +25,9 @@ bun run build
 
 ## 🌐 Deployment
 
-This landing is generated as a static site and deployed from GitHub Actions to the VPS using repository secrets.
+This landing is generated as a static site and can be deployed from GitHub Actions or uploaded to any static host.
 
-Required secrets:
-
-- `SSH_HOST`
-- `SSH_USER`
-- `SSH_PRIVATE_KEY`
-- `SSH_PORT`
-- `DEPLOY_PATH`
+Use repository secrets or your hosting provider configuration to keep deployment credentials out of the repo.
 
 ## 🔗 Links
 
