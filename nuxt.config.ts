@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 const siteUrl = "https://sapo.stevenacz.com";
-const ogImageUrl = `${siteUrl}/og-image.png`;
+const ogImageUrl = `${siteUrl}/og-image-20260513.png`;
 const buildTimestamp = new Date().toISOString();
 
 const cspContent = [
