@@ -29,6 +29,15 @@ This landing is generated as a static site and can be deployed from GitHub Actio
 
 Use repository secrets or your hosting provider configuration to keep deployment credentials out of the repo.
 
+## 🔎 SEO & Performance
+
+- Explicit SSR mode is enabled (`ssr: true`) while keeping static generation via `nuxt generate`.
+- Sitemap is generated through `@nuxtjs/sitemap` during build, avoiding stale manual `lastmod` values.
+- Structured data is embedded with JSON-LD (`WebSite`, `SoftwareApplication`, `Person`).
+- Metadata includes canonical URL, Open Graph/Twitter image details, locale, and robots directives.
+- A strict CSP meta policy is configured for Nuxt runtime, Google Fonts, and the GitHub API release fetch.
+- A valid `public/manifest.json` is included and linked from the document head.
+
 ## 🔗 Links
 
 - App repository: https://github.com/StevenACZ/SapoWhisper
