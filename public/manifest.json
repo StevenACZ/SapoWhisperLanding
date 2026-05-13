@@ -1,0 +1,32 @@
+{
+  "name": "SapoWhisper",
+  "short_name": "SapoWhisper",
+  "description": "Native dictation for macOS with menu bar controls, local or cloud transcription, overlay, auto-paste, and searchable history.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#05070A",
+  "theme_color": "#10B981",
+  "icons": [
+    {
+      "src": "/icons/icon_128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    }
+  ]
+}
