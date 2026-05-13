@@ -47,6 +47,7 @@ SapoWhisperLanding/
 ├── public/
 │   ├── favicon.ico
 │   ├── manifest.json
+│   ├── og-image-20260513.png
 │   ├── og-image.png
 │   └── robots.txt
 ├── nuxt.config.ts
@@ -94,7 +95,8 @@ Keep copy aligned with the public app positioning:
 - Keep structured data consolidated and non-conflicting: `WebSite`, `SoftwareApplication`, and `Person`.
 - Keep `robots.txt` pointing at `https://sapo.stevenacz.com/sitemap.xml`.
 - Keep `public/manifest.json` valid JSON with real icons, categories, `lang`, and `dir`.
-- Keep `public/og-image.png` as a real PNG and keep OG dimensions aligned with the committed asset.
+- Keep `public/og-image-20260513.png` as the current social preview PNG and keep OG dimensions aligned with the committed asset.
+- Keep `public/og-image.png` only as a compatibility asset for previously cached previews.
 
 ## Component Guidelines
 
