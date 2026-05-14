@@ -1,9 +1,5 @@
-# Nuxt dev/build outputs
-.output
-.data
-.nuxt
-.nitro
-.cache
+# Astro dev/build outputs
+.astro
 dist
 
 # Node dependencies
@@ -22,6 +18,11 @@ logs
 .env
 .env.*
 !.env.example
+
+# VSCode
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
 
 # Private planning documents
 MVP_PLAN.md
