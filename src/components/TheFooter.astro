@@ -1,0 +1,184 @@
+---
+import { fetchLatestVersion } from "../data/github";
+
+const currentYear = new Date().getFullYear();
+const version = await fetchLatestVersion();
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="#" class="footer__logo">
+          <img
+            src="/icons/icon_128x128.png"
+            alt="SapoWhisper logo"
+            class="footer__logo-icon"
+          />
+          <span>SapoWhisper</span>
+        </a>
+        <p class="footer__tagline">
+          Native dictation for macOS — fast to trigger, flexible to run, and
+          built for real work.
+        </p>
+      </div>
+
+      <div class="footer__columns">
+        <div>
+          <h4>Product</h4>
+          <a href="#features">Features</a>
+          <a href="#history">History</a>
+          <a href="#how-it-works">Workflow</a>
+          <a href="#download">Download</a>
+        </div>
+
+        <div>
+          <h4>Resources</h4>
+          <a
+            href="https://github.com/StevenACZ/SapoWhisper"
+            target="_blank"
+            rel="noopener noreferrer">App repository</a
+          >
+          <a
+            href="https://github.com/StevenACZ/SapoWhisper/releases"
+            target="_blank"
+            rel="noopener noreferrer">Release notes</a
+          >
+          <a
+            href="https://github.com/StevenACZ/SapoWhisper/issues"
+            target="_blank"
+            rel="noopener noreferrer">Issues</a
+          >
+        </div>
+
+        <div>
+          <h4>Stack</h4>
+          <p class="footer__stack-list">
+            SwiftUI · WhisperKit · Deepgram · Google Cloud · SQLite History
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>
+        © {currentYear} SapoWhisper · Made by
+        <a
+          href="https://github.com/StevenACZ"
+          target="_blank"
+          rel="noopener noreferrer">StevenACZ</a
+        >
+      </p>
+      <div class="footer__meta">
+        <span class="footer__version">{version}</span>
+        <span>MIT License</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style lang="scss">
+  @use "../styles/variables" as *;
+
+  .footer {
+    padding: $spacing-4xl 0 $spacing-2xl;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    background: $bg-dark-secondary;
+
+    &__top {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+      gap: $spacing-3xl;
+      margin-bottom: $spacing-3xl;
+    }
+
+    &__logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    &__logo-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+    }
+
+    &__tagline {
+      max-width: 400px;
+      color: $neutral-400;
+      line-height: 1.8;
+    }
+
+    &__columns {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: $spacing-xl;
+
+      h4 {
+        margin-bottom: 1rem;
+        color: $neutral-200;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.8rem;
+      }
+
+      a {
+        display: block;
+        margin-bottom: 0.8rem;
+        color: $neutral-400;
+        transition: color $transition-fast;
+
+        &:hover {
+          color: $primary-300;
+        }
+      }
+    }
+
+    &__stack-list {
+      color: $neutral-400;
+      line-height: 1.9;
+    }
+
+    &__version {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    &__bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: $spacing-lg;
+      flex-wrap: wrap;
+      padding-top: $spacing-xl;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      color: $neutral-400;
+
+      a {
+        color: $neutral-200;
+      }
+    }
+
+    &__meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .footer__top,
+    .footer__columns {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

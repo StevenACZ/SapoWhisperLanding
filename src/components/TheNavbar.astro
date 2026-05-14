@@ -1,0 +1,279 @@
+---
+const links = [
+  { href: "#features", label: "Features" },
+  { href: "#history", label: "History" },
+  { href: "#how-it-works", label: "Workflow" },
+  { href: "#download", label: "Download" },
+];
+---
+
+<nav class="navbar" data-navbar>
+  <div class="navbar__container container">
+    <a href="#" class="navbar__logo">
+      <img
+        src="/icons/icon_128x128.png"
+        alt="SapoWhisper Logo"
+        class="navbar__logo-icon"
+      />
+      <span class="navbar__logo-text">SapoWhisper</span>
+    </a>
+
+    <ul class="navbar__links">
+      {
+        links.map((link) => (
+          <li>
+            <a href={link.href} class="navbar__link">
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <a
+      href="https://github.com/StevenACZ/SapoWhisper"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="navbar__cta"
+    >
+      GitHub
+    </a>
+
+    <button
+      class="navbar__mobile-btn"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+      data-mobile-toggle
+    >
+      <span class="navbar__mobile-icon" data-mobile-icon></span>
+    </button>
+  </div>
+
+  <div id="mobile-nav" class="navbar__mobile-menu" data-mobile-menu>
+    <ul class="navbar__mobile-links">
+      {
+        links.map((link) => (
+          <li>
+            <a href={link.href} class="navbar__mobile-link" data-mobile-link>
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+      <li>
+        <a
+          href="https://github.com/StevenACZ/SapoWhisper"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="navbar__mobile-link navbar__mobile-link--github"
+        >
+          View on GitHub
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<script>
+  const navbar = document.querySelector<HTMLElement>("[data-navbar]");
+  const toggleBtn = document.querySelector<HTMLButtonElement>(
+    "[data-mobile-toggle]",
+  );
+  const icon = document.querySelector<HTMLElement>("[data-mobile-icon]");
+  const menu = document.querySelector<HTMLElement>("[data-mobile-menu]");
+  const links = document.querySelectorAll<HTMLAnchorElement>("[data-mobile-link]");
+
+  if (navbar) {
+    const onScroll = () => {
+      navbar.classList.toggle("navbar--scrolled", window.scrollY > 24);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+
+  const setOpen = (open: boolean) => {
+    if (!toggleBtn || !icon || !menu) return;
+    toggleBtn.setAttribute("aria-expanded", String(open));
+    toggleBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    icon.classList.toggle("is-open", open);
+    menu.classList.toggle("is-open", open);
+  };
+
+  toggleBtn?.addEventListener("click", () => {
+    const open = toggleBtn.getAttribute("aria-expanded") === "true";
+    setOpen(!open);
+  });
+
+  links.forEach((link) => link.addEventListener("click", () => setOpen(false)));
+</script>
+
+<style lang="scss">
+  @use "../styles/variables" as *;
+
+  .navbar {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 1000;
+    padding: 1rem 0;
+    transition: all $transition-base;
+
+    &--scrolled {
+      background: rgba(10, 10, 11, 0.72);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    &__container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    &__logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    &__logo-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+    }
+
+    &__logo-text {
+      color: $neutral-100;
+    }
+
+    &__links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    &__link {
+      color: $neutral-400;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color $transition-fast;
+
+      &:hover {
+        color: $neutral-100;
+      }
+    }
+
+    &__cta {
+      color: $neutral-300;
+      font-size: 0.92rem;
+      font-weight: 600;
+      transition: color $transition-fast;
+
+      &:hover {
+        color: $neutral-100;
+      }
+    }
+
+    &__mobile-btn {
+      display: none;
+      width: 40px;
+      height: 40px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &__mobile-icon,
+    &__mobile-icon::before,
+    &__mobile-icon::after {
+      width: 20px;
+      height: 2px;
+      border-radius: 999px;
+      background: $neutral-100;
+      transition: all $transition-fast;
+    }
+
+    &__mobile-icon {
+      position: relative;
+    }
+
+    &__mobile-icon::before,
+    &__mobile-icon::after {
+      content: "";
+      position: absolute;
+      left: 0;
+    }
+
+    &__mobile-icon::before {
+      top: -6px;
+    }
+
+    &__mobile-icon::after {
+      top: 6px;
+    }
+
+    &__mobile-icon.is-open {
+      background: transparent;
+    }
+
+    &__mobile-icon.is-open::before {
+      top: 0;
+      transform: rotate(45deg);
+    }
+
+    &__mobile-icon.is-open::after {
+      top: 0;
+      transform: rotate(-45deg);
+    }
+
+    &__mobile-menu {
+      display: none;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .navbar__links,
+    .navbar__cta {
+      display: none;
+    }
+
+    .navbar__mobile-btn {
+      display: inline-flex;
+    }
+
+    .navbar__mobile-menu {
+      display: block;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height $transition-base;
+      background: rgba(10, 10, 11, 0.94);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+      &.is-open {
+        max-height: 320px;
+      }
+    }
+
+    .navbar__mobile-links {
+      list-style: none;
+      padding: 0 1.5rem 1.5rem;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .navbar__mobile-link {
+      display: block;
+      padding: 0.85rem 0;
+      color: $neutral-300;
+
+      &--github {
+        color: $primary-300;
+        font-weight: 600;
+      }
+    }
+  }
+</style>
