@@ -1,0 +1,135 @@
+// ============================================
+// UTILITIES - Reusable Utility Classes
+// ============================================
+
+@use "variables" as *;
+@use "mixins" as *;
+
+// ============================================
+// Layout
+// ============================================
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+}
+
+.section {
+  padding: $spacing-4xl 0;
+}
+
+// ============================================
+// Typography
+// ============================================
+.text-gradient {
+  background: linear-gradient(
+    135deg,
+    $primary-400 0%,
+    $primary-300 50%,
+    $accent-amber 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-muted {
+  color: $neutral-400;
+}
+
+// ============================================
+// Buttons
+// ============================================
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: $spacing-md $spacing-xl;
+  border-radius: $radius-lg;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all $transition-base;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: $gradient-primary;
+  color: white;
+  box-shadow: $shadow-md, $shadow-glow-sm;
+
+  &:hover {
+    box-shadow: $shadow-lg, $shadow-glow;
+  }
+
+  &:active {
+    box-shadow: $shadow-md, $shadow-glow-sm;
+  }
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: $neutral-100;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.btn-lg {
+  padding: $spacing-lg $spacing-2xl;
+  font-size: 1.125rem;
+}
+
+// ============================================
+// Cards
+// ============================================
+.card {
+  background: $bg-dark-secondary;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: $radius-xl;
+  padding: $spacing-xl;
+  transition: all $transition-base;
+
+  &:hover {
+    border-color: rgba(16, 185, 129, 0.2);
+    transform: translateY(-4px);
+    box-shadow: $shadow-lg;
+  }
+}
+
+.card-glass {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+// ============================================
+// Responsive spacing overrides (preserve Nuxt build behavior)
+// ============================================
+@include below-lg {
+  .section {
+    padding: $spacing-3xl 0;
+  }
+}
+
+@include below-md {
+  .section {
+    padding: $spacing-2xl 0;
+  }
+
+  .container {
+    padding: 0 $spacing-md;
+  }
+}
+
+@include below-sm {
+  .section {
+    padding: $spacing-xl 0;
+  }
+}
