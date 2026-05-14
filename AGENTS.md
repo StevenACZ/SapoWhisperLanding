@@ -2,7 +2,7 @@
 
 ## Scope
 
-Public Nuxt landing page for SapoWhisper. Keep it static-host friendly, crawler-visible, accessible, and safe to publish.
+Public Astro landing page for SapoWhisper. Keep it static-host friendly, crawler-visible, accessible, and safe to publish.
 
 ## Security and Privacy
 
@@ -12,21 +12,22 @@ Public Nuxt landing page for SapoWhisper. Keep it static-host friendly, crawler-
 
 ## Project Overview
 
-| Field    | Value                                        |
-| -------- | -------------------------------------------- |
-| URL      | `https://sapo.stevenacz.com`                 |
-| App repo | `https://github.com/StevenACZ/SapoWhisper`   |
-| Stack    | Nuxt 4, Vue 3, Vite/Nitro, `@nuxtjs/sitemap` |
-| Output   | SSR enabled, generated as static HTML        |
+| Field    | Value                                      |
+| -------- | ------------------------------------------ |
+| URL      | `https://sapo.stevenacz.com`               |
+| App repo | `https://github.com/StevenACZ/SapoWhisper` |
+| Stack    | Astro 6, Sass, `@astrojs/sitemap`          |
+| Output   | Static HTML in `dist/`                     |
 
 ## Structure
 
-- `app/pages/index.vue`: landing route.
-- `app/components/`: section components.
-- `app/assets/css/main.css`: global tokens, layout, utilities.
-- `app/composables/useGithubRelease.ts`: public GitHub release data.
+- `src/pages/index.astro`: landing route.
+- `src/layouts/Layout.astro`: head, meta, CSP, JSON-LD, global SCSS entry.
+- `src/components/*.astro`: section components.
+- `src/styles/`: `_variables`, `_mixins`, `_base`, `_animations`, `_utilities`, `main.scss`.
+- `src/data/github.ts`: build-time fetch of latest release version.
 - `public/`: icons, manifest, robots, OG images.
-- `nuxt.config.ts`: SEO, CSP, sitemap, structured data, prerendering.
+- `astro.config.mjs`: site URL, sitemap, build config.
 
 ## Commands
 
@@ -40,7 +41,7 @@ bun run build
 bun run preview
 ```
 
-Do not commit `.output/`, `.nuxt/`, `dist/`, `node_modules/`, local docs, or env files.
+Do not commit `.astro/`, `dist/`, `node_modules/`, local docs, or env files.
 
 ## Product Copy
 
@@ -57,20 +58,20 @@ Keep copy aligned with the public app positioning:
 
 ## UI Guidelines
 
-- Global tokens live in `app/assets/css/main.css`.
+- SCSS tokens live in `src/styles/_variables.scss`. Import with `@use "../styles/variables" as *`.
 - Preserve the emerald/green identity and restrained dark macOS app aesthetic.
-- Use existing utilities such as `.container`, `.section`, `.btn`, `.card`, `.card-glass`, and `.text-gradient`.
-- Existing responsive breakpoints are 1024px, 768px, and 480px.
+- Use existing utilities such as `.container`, `.section`, `.btn`, `.card`, `.card-glass`, `.text-gradient`.
+- Existing responsive breakpoints are 1024px, 768px, 480px.
 - Keep animations based on `transform` and `opacity` when possible.
 - Prefer editing existing components before adding new ones.
 
 ## SEO and Structured Data
 
-- `nuxt.config.ts` owns URL, SSR/static settings, sitemap, manifest link, metadata, Open Graph, Twitter Card, CSP, and JSON-LD.
-- Keep JSON-LD consolidated and non-conflicting: `WebSite`, `SoftwareApplication`, and `Person`.
-- Keep `robots.txt` pointing at `https://sapo.stevenacz.com/sitemap.xml`.
+- `src/layouts/Layout.astro` owns title, description, CSP, Open Graph, Twitter Card, manifest link, sitemap link, and JSON-LD.
+- Keep JSON-LD consolidated and non-conflicting: `WebSite`, `SoftwareApplication`, `Person`.
+- Keep `public/robots.txt` pointing at `https://sapo.stevenacz.com/sitemap-index.xml`.
 - Keep `public/manifest.json` valid JSON with real icons, categories, `lang`, and `dir`.
-- Keep copy consistent across hero, features, download CTA, metadata, JSON-LD, README, and changelog.
+- The deploy workflow validates the live HTML by grepping for `SapoWhisper - Native Dictation for macOS`; keep that string in the layout `<title>`.
 
 ## Verification
 
@@ -82,13 +83,13 @@ bun run typecheck
 bun run build
 ```
 
-For SEO work, inspect generated output for:
+For SEO work, inspect generated `dist/index.html` for:
 
 - `application/ld+json`
 - description and Open Graph metadata
 - CSP meta tag
 - valid `manifest.json`
-- valid `sitemap.xml`
+- valid `sitemap-index.xml`
 - real social preview image
 
 ## Git Safety

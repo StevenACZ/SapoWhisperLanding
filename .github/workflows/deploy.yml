@@ -17,6 +17,7 @@ jobs:
       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       SSH_PORT: ${{ secrets.SSH_PORT }}
       DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+      PRODUCTION_URL: https://sapo.stevenacz.com
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
@@ -24,7 +25,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -169,3 +170,11 @@ jobs:
             -e "ssh -i ~/.ssh/deploy_key -p $port" \
             "$output_dir/" \
             "$SSH_USER@$SSH_HOST:$DEPLOY_PATH/"
+
+      - name: Validate deployed site
+        run: |
+          curl -fsSL "$PRODUCTION_URL" > /tmp/live.html
+          if ! grep -q "SapoWhisper - Native Dictation for macOS" /tmp/live.html; then
+            echo "Live site validation failed after deploy."
+            exit 1
+          fi

@@ -5,4 +5,4 @@ User-Agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://sapo.stevenacz.com/sitemap.xml
+Sitemap: https://sapo.stevenacz.com/sitemap-index.xml
