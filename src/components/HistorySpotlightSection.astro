@@ -1,19 +1,27 @@
 ---
+import SearchIcon from "./icons/SearchIcon.astro";
+import HeadphonesIcon from "./icons/HeadphonesIcon.astro";
+import RefreshIcon from "./icons/RefreshIcon.astro";
+import PinIcon from "./icons/PinIcon.astro";
+import DownloadIcon from "./icons/DownloadIcon.astro";
+import WaveformIcon from "./icons/WaveformIcon.astro";
+import SparklesIcon from "./icons/SparklesIcon.astro";
+
 const points = [
   {
-    icon: "🔎",
+    icon: SearchIcon,
     title: "Search what you already said",
     description:
       "Find older transcripts quickly instead of dictating the same thing twice.",
   },
   {
-    icon: "🎧",
+    icon: HeadphonesIcon,
     title: "Replay the original audio",
     description:
       "Listen back before sharing, editing, or comparing transcription quality.",
   },
   {
-    icon: "🔁",
+    icon: RefreshIcon,
     title: "Try another engine later",
     description:
       "Re-process the same recording when accuracy matters more than speed.",
@@ -43,10 +51,10 @@ const entries = [
 ];
 
 const chips = [
-  "Audio playback",
-  "Re-transcribe",
-  "Download audio",
-  "Engine filters",
+  { icon: HeadphonesIcon, label: "Audio playback" },
+  { icon: RefreshIcon, label: "Re-transcribe" },
+  { icon: DownloadIcon, label: "Download audio" },
+  { icon: SparklesIcon, label: "Re-polish with AI" },
 ];
 ---
 
@@ -68,7 +76,9 @@ const chips = [
         {
           points.map((point) => (
             <div class="history__point">
-              <div class="history__point-icon">{point.icon}</div>
+              <div class="history__point-icon">
+                <point.icon size={18} />
+              </div>
               <div>
                 <h3>{point.title}</h3>
                 <p>{point.description}</p>
@@ -89,7 +99,10 @@ const chips = [
 
         <div class="history__workspace">
           <aside class="history__sidebar">
-            <div class="history__search">Search transcripts...</div>
+            <div class="history__search">
+              <SearchIcon size={14} />
+              Search transcripts...
+            </div>
             {
               entries.map((entry) => (
                 <div
@@ -109,7 +122,10 @@ const chips = [
           </aside>
 
           <div class="history__detail">
-            <div class="history__badge">Pinned transcript</div>
+            <div class="history__badge">
+              <PinIcon size={12} />
+              Pinned transcript
+            </div>
             <h3>Review, replay, and refine</h3>
             <p>
               Keep the original audio, compare engines, and export the result
@@ -117,16 +133,27 @@ const chips = [
             </p>
 
             <div class="history__chips">
-              {chips.map((chip) => <span>{chip}</span>)}
+              {
+                chips.map((chip) => (
+                  <span>
+                    <chip.icon size={14} />
+                    {chip.label}
+                  </span>
+                ))
+              }
             </div>
 
             <div class="history__mini-player">
+              <div class="history__mini-player-head">
+                <WaveformIcon size={16} />
+                <span>Recorded from preferred microphone</span>
+              </div>
               <div class="history__mini-player-wave">
                 {Array.from({ length: 16 }).map(() => <span />)}
               </div>
               <div class="history__mini-player-meta">
                 <strong>00:18 / 00:34</strong>
-                <small>Recorded from preferred microphone</small>
+                <small>Deepgram Nova-3 · AI polished</small>
               </div>
             </div>
           </div>
@@ -161,7 +188,7 @@ const chips = [
     }
 
     &__title {
-      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-size: clamp(2rem, 4vw, 3rem);
       line-height: 1.1;
       margin-bottom: $spacing-lg;
     }
@@ -169,8 +196,8 @@ const chips = [
     &__description {
       color: $neutral-400;
       font-size: 1.0625rem;
-      line-height: 1.8;
-      margin-bottom: $spacing-2xl;
+      line-height: 1.7;
+      margin-bottom: $spacing-xl;
     }
 
     &__points {
@@ -186,11 +213,13 @@ const chips = [
 
       h3 {
         font-size: 1rem;
-        margin-bottom: 0.35rem;
+        margin-bottom: 0.3rem;
       }
 
       p {
         color: $neutral-400;
+        font-size: 0.92rem;
+        line-height: 1.6;
       }
     }
 
@@ -202,7 +231,8 @@ const chips = [
       justify-content: center;
       border-radius: $radius-lg;
       background: rgba(16, 185, 129, 0.1);
-      border: 1px solid rgba(16, 185, 129, 0.18);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      color: $primary-300;
     }
 
     &__visual {
@@ -216,7 +246,7 @@ const chips = [
     }
 
     &__window {
-      border-radius: 24px;
+      border-radius: 22px;
       overflow: hidden;
       background: #0e1014;
       border: 1px solid rgba(255, 255, 255, 0.06);
@@ -245,35 +275,38 @@ const chips = [
     }
 
     &__sidebar {
-      padding: 1rem;
+      padding: 0.9rem;
       border-right: 1px solid rgba(255, 255, 255, 0.05);
       background: rgba(255, 255, 255, 0.015);
     }
 
     &__search {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      width: 100%;
       margin-bottom: 1rem;
-      padding: 0.85rem 1rem;
+      padding: 0.75rem 0.9rem;
       border-radius: $radius-lg;
       background: rgba(255, 255, 255, 0.04);
       color: $neutral-500;
-      font-size: 0.9375rem;
+      font-size: 0.88rem;
     }
 
     &__entry {
-      padding: 0.9rem;
+      padding: 0.85rem;
       border-radius: $radius-lg;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.55rem;
       border: 1px solid transparent;
-      background: transparent;
 
       &.is-active {
         background: rgba(16, 185, 129, 0.08);
-        border-color: rgba(16, 185, 129, 0.14);
+        border-color: rgba(16, 185, 129, 0.18);
       }
 
       p {
         color: $neutral-400;
-        font-size: 0.875rem;
+        font-size: 0.86rem;
         line-height: 1.5;
       }
     }
@@ -281,73 +314,90 @@ const chips = [
     &__entry-top {
       display: flex;
       justify-content: space-between;
-      gap: 0.75rem;
-      margin-bottom: 0.35rem;
+      gap: 0.6rem;
+      margin-bottom: 0.3rem;
 
       strong {
-        font-size: 0.95rem;
+        font-size: 0.92rem;
+        color: $neutral-100;
       }
 
       span {
-        font-size: 0.75rem;
+        font-size: 0.72rem;
         color: $primary-300;
+        font-weight: 600;
       }
     }
 
     &__detail {
-      padding: 1.5rem;
+      padding: 1.4rem;
 
       h3 {
-        font-size: 1.5rem;
-        margin-bottom: 0.8rem;
+        font-size: 1.4rem;
+        margin-bottom: 0.6rem;
       }
 
       p {
         color: $neutral-400;
-        line-height: 1.75;
+        line-height: 1.7;
       }
     }
 
     &__badge {
       display: inline-flex;
       align-items: center;
-      padding: 0.45rem 0.8rem;
-      margin-bottom: 1rem;
+      gap: 0.4rem;
+      padding: 0.4rem 0.75rem;
+      margin-bottom: 0.85rem;
       border-radius: 999px;
-      background: rgba(16, 185, 129, 0.1);
-      color: $primary-300;
-      font-size: 0.8125rem;
+      background: rgba(16, 185, 129, 0.12);
+      color: $primary-200;
+      font-size: 0.78rem;
       font-weight: 700;
+      letter-spacing: 0.04em;
     }
 
     &__chips {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
-      margin: 1.5rem 0;
+      gap: 0.5rem;
+      margin: 1.2rem 0 1.4rem;
 
       span {
-        padding: 0.6rem 0.85rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.45rem 0.75rem;
         border-radius: 999px;
         background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.07);
         color: $neutral-300;
-        font-size: 0.875rem;
+        font-size: 0.82rem;
       }
     }
 
     &__mini-player {
-      padding: 1rem;
+      padding: 0.9rem 1rem;
       border-radius: $radius-xl;
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    &__mini-player-head {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-bottom: 0.65rem;
+      color: $neutral-300;
+      font-size: 0.82rem;
     }
 
     &__mini-player-wave {
       display: flex;
       align-items: end;
       gap: 0.25rem;
-      height: 48px;
-      margin-bottom: 0.9rem;
+      height: 40px;
+      margin-bottom: 0.75rem;
 
       span {
         flex: 1;
@@ -375,8 +425,15 @@ const chips = [
       gap: 1rem;
       flex-wrap: wrap;
 
+      strong {
+        font-size: 0.88rem;
+        color: $neutral-100;
+      }
+
       small {
-        color: $neutral-500;
+        color: $primary-300;
+        font-size: 0.78rem;
+        font-weight: 500;
       }
     }
   }
