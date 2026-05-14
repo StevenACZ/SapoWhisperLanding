@@ -48,7 +48,7 @@ Do not commit `.astro/`, `dist/`, `node_modules/`, local docs, or env files.
 
 Keep copy aligned with the public app positioning (v2.1):
 
-- macOS menu bar dictation, native SwiftUI, Apple Silicon + Intel
+- macOS menu bar dictation, native SwiftUI, Apple Silicon only (M1+, macOS 14.0+)
 - four engines: Apple Speech, WhisperKit (local, recommended), Google Cloud Chirp 3, Deepgram Nova-3 / Flux Live
 - AI improvement via Gemini 3.1 Flash-Lite on Vertex AI with built-in modes (Automatic, AI Assistant Prompt, Work Message, Translate to English) and custom prompts per project
 - custom vocabulary and personal context applied to every AI mode

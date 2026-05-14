@@ -64,15 +64,11 @@ const steps = [
     </div>
 
     <ol class="stepper" data-stepper>
-      <div class="stepper__rail" aria-hidden="true">
-        <div class="stepper__progress" data-stepper-progress></div>
-      </div>
       {
         steps.map((step, index) => (
           <li
             class:list={["stepper__item", { "is-active": index === 0 }]}
             data-stepper-item
-            style={`--step-index: ${index}`}
           >
             <div class="stepper__dot">
               <span class="stepper__dot-number">{step.number}</span>
@@ -85,6 +81,9 @@ const steps = [
               <h3>{step.title}</h3>
               <p>{step.description}</p>
             </div>
+            {index < steps.length - 1 && (
+              <span class="stepper__connector" aria-hidden="true" />
+            )}
           </li>
         ))
       }
@@ -95,17 +94,15 @@ const steps = [
 <script>
   const stepper = document.querySelector<HTMLElement>("[data-stepper]");
   const items = document.querySelectorAll<HTMLElement>("[data-stepper-item]");
-  const progress = document.querySelector<HTMLElement>(
-    "[data-stepper-progress]",
-  );
 
-  if (stepper && items.length > 0 && progress) {
+  if (stepper && items.length > 0) {
     const total = items.length;
     let current = 0;
     const update = (index: number) => {
-      items.forEach((el, i) => el.classList.toggle("is-active", i === index));
-      const percent = (index / (total - 1)) * 100;
-      progress.style.setProperty("--progress", `${percent}%`);
+      items.forEach((el, i) => {
+        el.classList.toggle("is-active", i === index);
+        el.classList.toggle("is-completed", i < index);
+      });
     };
 
     const advance = () => {
@@ -183,28 +180,6 @@ const steps = [
     list-style: none;
     padding: 0;
 
-    &__rail {
-      position: absolute;
-      top: 36px;
-      left: 10%;
-      right: 10%;
-      height: 2px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 999px;
-      pointer-events: none;
-    }
-
-    &__progress {
-      --progress: 0%;
-      position: absolute;
-      inset: 0 auto 0 0;
-      width: var(--progress);
-      background: linear-gradient(90deg, $primary-500, $primary-400);
-      border-radius: 999px;
-      box-shadow: 0 0 12px rgba(16, 185, 129, 0.6);
-      transition: width 0.6s ease;
-    }
-
     &__item {
       position: relative;
       display: grid;
@@ -226,6 +201,7 @@ const steps = [
       align-items: center;
       justify-content: center;
       transition: all $transition-base;
+      z-index: 1;
 
       .stepper__item.is-active & {
         border-color: $primary-500;
@@ -233,6 +209,30 @@ const steps = [
         box-shadow:
           0 0 0 6px rgba(16, 185, 129, 0.1),
           0 0 28px rgba(16, 185, 129, 0.3);
+      }
+
+      .stepper__item.is-completed & {
+        border-color: rgba(16, 185, 129, 0.5);
+        background: rgba(16, 185, 129, 0.06);
+      }
+    }
+
+    &__connector {
+      position: absolute;
+      top: calc(0.4rem + 36px - 1px);
+      left: calc(50% + 40px);
+      width: calc(100% - 80px + #{$spacing-md});
+      height: 2px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      pointer-events: none;
+      transition:
+        background $transition-base,
+        box-shadow $transition-base;
+
+      .stepper__item.is-completed & {
+        background: linear-gradient(90deg, $primary-500, $primary-400);
+        box-shadow: 0 0 10px rgba(16, 185, 129, 0.45);
       }
     }
 
@@ -299,10 +299,6 @@ const steps = [
       grid-template-columns: 1fr;
       gap: $spacing-lg;
 
-      &__rail {
-        display: none;
-      }
-
       &__item {
         display: grid;
         grid-template-columns: auto 1fr;
@@ -315,6 +311,10 @@ const steps = [
         width: 56px;
         height: 56px;
         margin: 0;
+      }
+
+      &__connector {
+        display: none;
       }
 
       &__body {
