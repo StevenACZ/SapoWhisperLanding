@@ -4,7 +4,10 @@
   "description": "Native dictation for macOS with menu bar controls, local or cloud transcription, overlay, auto-paste, and searchable history.",
   "start_url": "/",
   "scope": "/",
+  "lang": "en",
+  "dir": "ltr",
   "display": "standalone",
+  "categories": ["productivity", "utilities"],
   "background_color": "#05070A",
   "theme_color": "#10B981",
   "icons": [
