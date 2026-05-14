@@ -1,0 +1,375 @@
+---
+import SparklesIcon from "./icons/SparklesIcon.astro";
+import MessageSquareIcon from "./icons/MessageSquareIcon.astro";
+import BookOpenIcon from "./icons/BookOpenIcon.astro";
+import LanguagesIcon from "./icons/LanguagesIcon.astro";
+
+const modes = [
+  { label: "Automatic", description: "Balanced cleanup for everyday dictation" },
+  { label: "AI Assistant Prompt", description: "Turn dictation into a clear request" },
+  { label: "Work Message", description: "Polish Slack, email, and team threads" },
+  { label: "Translate to English", description: "Convert any transcript into English" },
+];
+
+const capabilities = [
+  {
+    icon: MessageSquareIcon,
+    title: "Prompts per project",
+    description:
+      "Create editable modes for Codex, Claude Code, Slack, issues, or any dictation flow.",
+  },
+  {
+    icon: BookOpenIcon,
+    title: "Custom vocabulary",
+    description:
+      "Add product names, commands and frequent corrections so Deepgram and Gemini stop guessing.",
+  },
+  {
+    icon: LanguagesIcon,
+    title: "Personal context",
+    description:
+      "One profile that explains your role and tools — applied to every AI mode without inventing details.",
+  },
+];
+---
+
+<section id="ai" class="ai-spotlight section">
+  <div class="container ai-spotlight__container">
+    <div class="ai-spotlight__content">
+      <span class="ai-spotlight__label">
+        <SparklesIcon size={14} />
+        AI improvement
+      </span>
+      <h2 class="ai-spotlight__title">
+        Gemini polishes every transcript
+        <span class="text-gradient">before you paste</span>
+      </h2>
+      <p class="ai-spotlight__description">
+        SapoWhisper runs each transcript through Gemini 3.1 Flash-Lite on Vertex
+        AI. Pick a mode, plug in your project context, and get a clean message
+        instead of a raw dictation dump.
+      </p>
+
+      <ul class="ai-spotlight__capabilities">
+        {
+          capabilities.map((cap) => (
+            <li>
+              <span class="ai-spotlight__cap-icon">
+                <cap.icon size={18} />
+              </span>
+              <div>
+                <strong>{cap.title}</strong>
+                <p>{cap.description}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="ai-spotlight__powered">
+        <SparklesIcon size={14} />
+        <span>Powered by Vertex AI · <code>gemini-3.1-flash-lite</code></span>
+      </div>
+    </div>
+
+    <div class="ai-spotlight__demo">
+      <div class="ai-spotlight__demo-card">
+        <div class="ai-spotlight__demo-head">
+          <span class="ai-spotlight__demo-eyebrow">Mode</span>
+          <strong>Work Message</strong>
+        </div>
+
+        <div class="ai-spotlight__diff">
+          <div class="ai-spotlight__diff-block ai-spotlight__diff-block--raw">
+            <div class="ai-spotlight__diff-label">Raw transcript</div>
+            <p>
+              uh send to the team like the latest mockups before lunch i think
+              and also push the release branch to github and we can talk after
+              standup
+            </p>
+          </div>
+
+          <div class="ai-spotlight__diff-arrow" aria-hidden="true">
+            <SparklesIcon size={18} />
+          </div>
+
+          <div class="ai-spotlight__diff-block ai-spotlight__diff-block--polished">
+            <div class="ai-spotlight__diff-label">Polished by Gemini</div>
+            <p>
+              Sending the latest mockups to the team before lunch. Also pushing
+              the release branch to GitHub. Let's catch up after standup.
+            </p>
+          </div>
+        </div>
+
+        <div class="ai-spotlight__modes">
+          <span class="ai-spotlight__modes-label">Built-in modes</span>
+          <ul>
+            {
+              modes.map((mode, index) => (
+                <li class:list={[{ "is-active": index === 2 }]}>
+                  <strong>{mode.label}</strong>
+                  <span>{mode.description}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "../styles/variables" as *;
+
+  .ai-spotlight {
+    position: relative;
+    background:
+      radial-gradient(
+        circle at 20% 0%,
+        rgba(139, 92, 246, 0.08) 0%,
+        transparent 45%
+      ),
+      radial-gradient(
+        circle at 90% 50%,
+        rgba(16, 185, 129, 0.06) 0%,
+        transparent 50%
+      );
+
+    &__container {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: $spacing-3xl;
+      align-items: center;
+    }
+
+    &__label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.75rem;
+      margin-bottom: $spacing-md;
+      border-radius: 999px;
+      background: rgba(139, 92, 246, 0.12);
+      border: 1px solid rgba(139, 92, 246, 0.22);
+      color: #c4b5fd;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    &__title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+      margin-bottom: $spacing-lg;
+    }
+
+    &__description {
+      color: $neutral-400;
+      font-size: 1.06rem;
+      line-height: 1.7;
+      margin-bottom: $spacing-xl;
+    }
+
+    &__capabilities {
+      display: grid;
+      gap: 1rem;
+      list-style: none;
+
+      li {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0.85rem;
+        align-items: start;
+
+        strong {
+          display: block;
+          margin-bottom: 0.25rem;
+          color: $neutral-100;
+          font-size: 0.98rem;
+        }
+
+        p {
+          color: $neutral-400;
+          font-size: 0.92rem;
+          line-height: 1.6;
+        }
+      }
+    }
+
+    &__cap-icon {
+      width: 38px;
+      height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      background: rgba(139, 92, 246, 0.12);
+      border: 1px solid rgba(139, 92, 246, 0.22);
+      color: #c4b5fd;
+    }
+
+    &__powered {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-top: $spacing-xl;
+      padding: 0.55rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: $neutral-300;
+      font-size: 0.85rem;
+
+      code {
+        font-family: "SF Mono", "JetBrains Mono", Menlo, monospace;
+        font-size: 0.82rem;
+        color: #c4b5fd;
+      }
+    }
+
+    &__demo-card {
+      padding: $spacing-xl;
+      border-radius: 26px;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.04),
+        rgba(255, 255, 255, 0.02)
+      );
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: $shadow-xl;
+    }
+
+    &__demo-head {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: $spacing-md;
+    }
+
+    &__demo-eyebrow {
+      color: $neutral-500;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    &__demo-head strong {
+      font-size: 1rem;
+      color: $neutral-100;
+    }
+
+    &__diff {
+      display: grid;
+      gap: 0.5rem;
+      margin-bottom: $spacing-xl;
+    }
+
+    &__diff-block {
+      padding: 1rem;
+      border-radius: $radius-xl;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+
+      &--raw {
+        background: rgba(255, 255, 255, 0.025);
+
+        p {
+          color: $neutral-400;
+          font-family: "SF Mono", "JetBrains Mono", Menlo, monospace;
+          font-size: 0.88rem;
+          line-height: 1.65;
+        }
+      }
+
+      &--polished {
+        background: rgba(16, 185, 129, 0.07);
+        border-color: rgba(16, 185, 129, 0.18);
+
+        p {
+          color: $neutral-100;
+          font-size: 0.95rem;
+          line-height: 1.65;
+        }
+      }
+    }
+
+    &__diff-label {
+      margin-bottom: 0.45rem;
+      color: $neutral-500;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    &__diff-block--polished &__diff-label {
+      color: $primary-300;
+    }
+
+    &__diff-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      margin: 0 auto;
+      border-radius: 999px;
+      background: rgba(139, 92, 246, 0.16);
+      color: #c4b5fd;
+    }
+
+    &__modes-label {
+      display: block;
+      margin-bottom: 0.6rem;
+      color: $neutral-500;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    &__modes ul {
+      display: grid;
+      gap: 0.5rem;
+      list-style: none;
+    }
+
+    &__modes li {
+      display: grid;
+      gap: 0.15rem;
+      padding: 0.6rem 0.85rem;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid transparent;
+      transition: all $transition-fast;
+
+      strong {
+        font-size: 0.92rem;
+        color: $neutral-200;
+      }
+
+      span {
+        color: $neutral-500;
+        font-size: 0.82rem;
+      }
+
+      &.is-active {
+        background: rgba(16, 185, 129, 0.08);
+        border-color: rgba(16, 185, 129, 0.18);
+
+        strong {
+          color: $primary-200;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .ai-spotlight__container {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

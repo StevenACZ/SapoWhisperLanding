@@ -1,106 +1,68 @@
 ---
+import CommandIcon from "./icons/CommandIcon.astro";
+import ClipboardIcon from "./icons/ClipboardIcon.astro";
+import MicIcon from "./icons/MicIcon.astro";
+import LanguagesIcon from "./icons/LanguagesIcon.astro";
+
 const features = [
   {
-    emoji: "⚡",
-    tag: "Fast to trigger",
-    title: "Record from anywhere",
+    icon: CommandIcon,
+    tag: "Trigger anywhere",
+    title: "Global hotkey workflow",
     description:
-      "Launch dictation with a global shortcut and start speaking without switching away from the app you are already using.",
-    gradient: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
+      "Press ⌥ + Space (or your own shortcut) from any app — the recording overlay appears without stealing focus.",
   },
   {
-    emoji: "🧠",
-    tag: "Flexible engines",
-    title: "Pick the transcription engine",
+    icon: ClipboardIcon,
+    tag: "Output",
+    title: "Auto-copy and auto-paste",
     description:
-      "Choose the engine that fits the task: local privacy, simple online dictation, or stronger cloud recognition when accuracy matters.",
-    gradient: "linear-gradient(135deg, #10b981 0%, #047857 100%)",
+      "The polished transcript lands in your clipboard and drops directly where your cursor is, so dictation feels like typing.",
   },
   {
-    emoji: "📋",
-    tag: "Immediate output",
-    title: "Paste instantly",
-    description:
-      "Auto-copy and auto-paste keep your cursor moving so dictation feels like part of your writing flow, not a separate tool.",
-    gradient: "linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)",
-  },
-  {
-    emoji: "🗂️",
-    tag: "Keep the context",
-    title: "Searchable History",
-    description:
-      "Search older transcripts, pin important entries, replay audio, and come back later without losing what you dictated.",
-    gradient: "linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)",
-  },
-  {
-    emoji: "🎙️",
+    icon: MicIcon,
     tag: "Audio control",
-    title: "Built for daily microphone use",
+    title: "Built for daily mic use",
     description:
-      "Preferred microphone sync, mic test, gain controls, audio cues, and auto-ducking make the recording experience more reliable.",
-    gradient: "linear-gradient(135deg, #ec4899 0%, #be185d 100%)",
+      "Preferred microphone sync, mic test, gain controls, audio cues and auto-ducking that lowers system volume while you talk.",
   },
   {
-    emoji: "🪄",
-    tag: "Polished workflow",
-    title: "Refine instead of repeating",
+    icon: LanguagesIcon,
+    tag: "Bilingual UI",
+    title: "Spanish and English",
     description:
-      "Pause and resume, retry with another engine, download the audio, and keep improving the result without re-recording everything.",
-    gradient: "linear-gradient(135deg, #14b8a6 0%, #0f766e 100%)",
+      "Swap the interface and the transcription language between Spanish, English or Auto — recognise both without restarting.",
   },
 ];
-
-const engines = ["WhisperKit local", "Apple Speech", "Google Cloud", "Deepgram"];
 ---
 
 <section id="features" class="features section">
   <div class="container">
     <div class="features__header">
-      <span class="features__label">Features</span>
+      <span class="features__label">Power features</span>
       <h2 class="features__title">
         Built around the
         <span class="text-gradient">real dictation workflow</span>
       </h2>
       <p class="features__description">
-        SapoWhisper is no longer just a speech-to-text shortcut. It is a native
-        macOS workflow for recording, transcribing, pasting, revisiting, and
-        refining what you said.
+        Engines and AI handle the transcript. These are the everyday touches
+        that make SapoWhisper feel like part of your Mac, not a separate tool.
       </p>
     </div>
 
     <div class="features__grid">
       {
         features.map((feature) => (
-          <article class="feature-card card">
-            <div class="feature-card__top">
-              <div
-                class="feature-card__icon"
-                style={`background: ${feature.gradient}`}
-              >
-                <span>{feature.emoji}</span>
-              </div>
-              <span class="feature-card__tag">{feature.tag}</span>
+          <article class="feature-card">
+            <div class="feature-card__icon">
+              <feature.icon size={22} />
             </div>
+            <span class="feature-card__tag">{feature.tag}</span>
             <h3 class="feature-card__title">{feature.title}</h3>
             <p class="feature-card__description">{feature.description}</p>
           </article>
         ))
       }
-    </div>
-
-    <div class="features__highlight card-glass">
-      <div>
-        <span class="features__highlight-label">Engine flexibility</span>
-        <h3>Privacy when you want it. Cloud accuracy when you need it.</h3>
-        <p>
-          Go fully local with WhisperKit, or connect your own Google Cloud or
-          Deepgram credentials when you want cloud transcription.
-        </p>
-      </div>
-
-      <div class="features__engine-list">
-        {engines.map((engine) => <span>{engine}</span>)}
-      </div>
     </div>
   </div>
 </section>
@@ -112,13 +74,12 @@ const engines = ["WhisperKit local", "Apple Speech", "Google Cloud", "Deepgram"]
     position: relative;
 
     &__header {
-      max-width: 760px;
-      margin: 0 auto $spacing-4xl;
+      max-width: 740px;
+      margin: 0 auto $spacing-3xl;
       text-align: center;
     }
 
-    &__label,
-    &__highlight-label {
+    &__label {
       display: inline-block;
       margin-bottom: $spacing-md;
       font-size: 0.85rem;
@@ -129,123 +90,80 @@ const engines = ["WhisperKit local", "Apple Speech", "Google Cloud", "Deepgram"]
     }
 
     &__title {
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      line-height: 1.08;
-      margin-bottom: $spacing-lg;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+      margin-bottom: $spacing-md;
     }
 
     &__description {
       color: $neutral-400;
-      font-size: 1.06rem;
-      line-height: 1.8;
+      font-size: 1.05rem;
+      line-height: 1.7;
     }
 
     &__grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: $spacing-xl;
-      margin-bottom: $spacing-3xl;
-    }
-
-    &__highlight {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
-      gap: $spacing-2xl;
-      align-items: center;
-      padding: $spacing-2xl;
-      border-radius: 28px;
-      background: linear-gradient(
-        135deg,
-        rgba(16, 185, 129, 0.08),
-        rgba(59, 130, 246, 0.06)
-      );
-
-      h3 {
-        font-size: clamp(1.45rem, 3vw, 2rem);
-        line-height: 1.2;
-        margin-bottom: 0.8rem;
-      }
-
-      p {
-        color: $neutral-400;
-        line-height: 1.75;
-      }
-    }
-
-    &__engine-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-
-      span {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 52px;
-        padding: 0.85rem 1rem;
-        border-radius: $radius-xl;
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        color: $neutral-200;
-        font-weight: 600;
-      }
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: $spacing-lg;
     }
   }
 
   .feature-card {
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-md;
+    display: grid;
+    gap: 0.6rem;
     padding: $spacing-xl;
-    text-align: left;
+    border-radius: $radius-2xl;
+    background: $bg-dark-secondary;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all $transition-base;
 
-    &__top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: $spacing-md;
+    &:hover {
+      border-color: rgba(16, 185, 129, 0.22);
+      transform: translateY(-4px);
+      box-shadow: $shadow-lg;
     }
 
     &__icon {
-      width: 58px;
-      height: 58px;
+      width: 44px;
+      height: 44px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border-radius: 18px;
-      box-shadow: $shadow-md;
-      font-size: 1.4rem;
+      border-radius: 12px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.18);
+      color: $primary-300;
+      margin-bottom: 0.2rem;
     }
 
     &__tag {
-      font-size: 0.8rem;
       color: $neutral-500;
-      text-transform: uppercase;
+      font-size: 0.74rem;
       letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
     }
 
     &__title {
-      font-size: 1.2rem;
-      line-height: 1.35;
+      font-size: 1.05rem;
+      line-height: 1.3;
+      color: $neutral-50;
     }
 
     &__description {
       color: $neutral-400;
-      line-height: 1.75;
+      line-height: 1.65;
+      font-size: 0.92rem;
     }
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1100px) {
     .features__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-
-    .features__highlight {
-      grid-template-columns: 1fr;
-    }
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 600px) {
     .features__grid {
       grid-template-columns: 1fr;
     }
