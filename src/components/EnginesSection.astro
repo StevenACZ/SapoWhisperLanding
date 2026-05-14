@@ -1,0 +1,273 @@
+---
+import ShieldCheckIcon from "./icons/ShieldCheckIcon.astro";
+import CloudIcon from "./icons/CloudIcon.astro";
+import WaveformIcon from "./icons/WaveformIcon.astro";
+
+type Engine = {
+  name: string;
+  variant: "local" | "cloud" | "streaming";
+  tagline: string;
+  description: string;
+  badges: string[];
+  recommended?: boolean;
+};
+
+const engines: Engine[] = [
+  {
+    name: "Whisper Local",
+    variant: "local",
+    tagline: "WhisperKit on-device",
+    description:
+      "100% private. Audio never leaves your Mac. Works without an internet connection.",
+    badges: ["Local", "Free", "Offline"],
+    recommended: true,
+  },
+  {
+    name: "Apple Speech",
+    variant: "cloud",
+    tagline: "Online · Apple servers",
+    description:
+      "Free and ready to use. Sends audio to Apple's recognition service when online.",
+    badges: ["Cloud", "Free", "Fast"],
+  },
+  {
+    name: "Google Cloud Chirp 3",
+    variant: "cloud",
+    tagline: "Bring your own GCP project",
+    description:
+      "Maximum precision. Uses Google Cloud Speech-to-Text with your own credentials.",
+    badges: ["Cloud", "Highest accuracy", "GCP"],
+  },
+  {
+    name: "Deepgram Nova-3 / Flux Live",
+    variant: "streaming",
+    tagline: "Real-time streaming",
+    description:
+      "Low-latency streaming transcription with Nova-3, or Flux Live for partial results.",
+    badges: ["Cloud", "Streaming", "Low latency"],
+  },
+];
+---
+
+<section id="engines" class="engines section">
+  <div class="container">
+    <div class="engines__header">
+      <span class="engines__label">Transcription engines</span>
+      <h2 class="engines__title">
+        Pick the right tradeoff
+        <span class="text-gradient">per moment</span>
+      </h2>
+      <p class="engines__description">
+        Four engines, one workflow. Stay local for privacy, swap to the cloud
+        for accuracy, or stream in real time — without leaving the app.
+      </p>
+    </div>
+
+    <div class="engines__grid">
+      {
+        engines.map((engine) => (
+          <article
+            class:list={[
+              "engine-card",
+              { "engine-card--recommended": engine.recommended },
+            ]}
+          >
+            <div class="engine-card__top">
+              <div
+                class:list={[
+                  "engine-card__icon",
+                  `engine-card__icon--${engine.variant}`,
+                ]}
+              >
+                {engine.variant === "local" && <ShieldCheckIcon size={22} />}
+                {engine.variant === "cloud" && <CloudIcon size={22} />}
+                {engine.variant === "streaming" && <WaveformIcon size={22} />}
+              </div>
+              {engine.recommended && (
+                <span class="engine-card__pill">Recommended</span>
+              )}
+            </div>
+
+            <h3 class="engine-card__name">{engine.name}</h3>
+            <p class="engine-card__tagline">{engine.tagline}</p>
+            <p class="engine-card__description">{engine.description}</p>
+
+            <ul class="engine-card__badges">
+              {engine.badges.map((badge) => (
+                <li>{badge}</li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "../styles/variables" as *;
+
+  .engines {
+    position: relative;
+
+    &__header {
+      max-width: 740px;
+      margin: 0 auto $spacing-3xl;
+      text-align: center;
+    }
+
+    &__label {
+      display: inline-block;
+      margin-bottom: $spacing-md;
+      color: $primary-300;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    &__title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+      margin-bottom: $spacing-md;
+    }
+
+    &__description {
+      color: $neutral-400;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    &__grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: $spacing-lg;
+    }
+  }
+
+  .engine-card {
+    position: relative;
+    display: grid;
+    gap: 0.75rem;
+    padding: $spacing-xl;
+    border-radius: $radius-2xl;
+    background: $bg-dark-secondary;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition:
+      border-color $transition-base,
+      transform $transition-base,
+      box-shadow $transition-base;
+
+    &:hover {
+      border-color: rgba(16, 185, 129, 0.22);
+      transform: translateY(-4px);
+      box-shadow:
+        $shadow-lg,
+        0 0 60px rgba(16, 185, 129, 0.08);
+    }
+
+    &--recommended {
+      border-color: rgba(16, 185, 129, 0.28);
+      background:
+        linear-gradient(
+          135deg,
+          rgba(16, 185, 129, 0.08),
+          rgba(16, 185, 129, 0.02) 60%
+        ),
+        $bg-dark-secondary;
+    }
+
+    &__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: $spacing-md;
+      margin-bottom: 0.4rem;
+    }
+
+    &__icon {
+      width: 46px;
+      height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 13px;
+      border: 1px solid transparent;
+
+      &--local {
+        background: rgba(16, 185, 129, 0.12);
+        border-color: rgba(16, 185, 129, 0.18);
+        color: $primary-300;
+      }
+
+      &--cloud {
+        background: rgba(59, 130, 246, 0.12);
+        border-color: rgba(59, 130, 246, 0.18);
+        color: #93c5fd;
+      }
+
+      &--streaming {
+        background: rgba(139, 92, 246, 0.12);
+        border-color: rgba(139, 92, 246, 0.18);
+        color: #c4b5fd;
+      }
+    }
+
+    &__pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.32rem 0.65rem;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.16);
+      color: $primary-200;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    &__name {
+      font-size: 1.2rem;
+      line-height: 1.25;
+      color: $neutral-50;
+    }
+
+    &__tagline {
+      color: $neutral-500;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    &__description {
+      color: $neutral-400;
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    &__badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.6rem;
+      list-style: none;
+
+      li {
+        padding: 0.32rem 0.65rem;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        color: $neutral-300;
+        font-size: 0.78rem;
+        font-weight: 500;
+      }
+    }
+  }
+
+  @media (max-width: 720px) {
+    .engines__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
