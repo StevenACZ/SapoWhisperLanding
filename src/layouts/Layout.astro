@@ -1,0 +1,154 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const siteUrl = "https://sapo.stevenacz.com";
+const siteName = "SapoWhisper";
+const defaultTitle = "SapoWhisper - Native Dictation for macOS";
+const defaultDescription =
+  "A macOS menu bar app for fast dictation. Trigger recording with a shortcut, transcribe with local or cloud engines, paste instantly, and keep everything in History.";
+const ogDescription =
+  "Trigger recording from anywhere, transcribe with the engine you prefer, paste instantly, and revisit every transcript later.";
+const twitterDescription =
+  "Fast dictation for macOS with global hotkeys, local or cloud engines, auto-paste, and searchable history.";
+const ogImage = `${siteUrl}/og-image-20260513.png`;
+
+const { title: customTitle, description: customDescription } = Astro.props;
+const title = customTitle ?? defaultTitle;
+const description = customDescription ?? defaultDescription;
+
+const cspPolicy = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline'",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src 'self' https://fonts.gstatic.com",
+  "img-src 'self' data:",
+  "connect-src 'self' https://api.github.com",
+  "frame-ancestors 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+].join("; ");
+
+const schemaGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: `${siteUrl}/`,
+      name: siteName,
+      description:
+        "Native dictation for macOS with menu bar controls, global shortcuts, and flexible transcription engines.",
+      inLanguage: "en",
+      publisher: { "@id": `${siteUrl}/#person` },
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": `${siteUrl}/#software`,
+      name: siteName,
+      applicationCategory: "ProductivityApplication",
+      operatingSystem: "macOS",
+      description:
+        "A native macOS menu bar dictation app with local or cloud transcription, recording overlay, auto-paste, and searchable history.",
+      softwareVersion: "Latest",
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+      },
+      publisher: { "@id": `${siteUrl}/#person` },
+      creator: { "@id": `${siteUrl}/#person` },
+      sameAs: [
+        "https://github.com/StevenACZ/SapoWhisper",
+        "https://github.com/StevenACZ/SapoWhisper/releases",
+      ],
+      url: `${siteUrl}/`,
+    },
+    {
+      "@type": "Person",
+      "@id": `${siteUrl}/#person`,
+      name: "Steven Coaila Zaa",
+      alternateName: "StevenACZ",
+      url: "https://stevenacz.com",
+      sameAs: ["https://stevenacz.com", "https://github.com/StevenACZ"],
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta http-equiv="Content-Security-Policy" content={cspPolicy} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="macOS dictation, voice typing mac, speech to text macOS, menu bar dictation, mac transcription app, whisper macOS, voice workflow"
+    />
+    <meta name="author" content="StevenACZ" />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <meta name="theme-color" content="#10B981" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={`${siteUrl}/`} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content="SapoWhisper landing preview" />
+    <meta property="og:image:width" content="1024" />
+    <meta property="og:image:height" content="1024" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={twitterDescription} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content="SapoWhisper landing preview" />
+
+    <!-- Canonical, manifest & sitemap -->
+    <link rel="canonical" href={`${siteUrl}/`} />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    />
+
+    <!-- Schema.org JSON-LD -->
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(schemaGraph)}
+    />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global lang="scss">
+  @use "../styles/main.scss";
+</style>
