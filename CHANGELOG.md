@@ -1,23 +1,13 @@
 # Changelog
 
-All notable changes to this project are documented in this file.
+## Unreleased
 
-## [Unreleased]
+- Updated Nuxt/Vue dependencies to the current 2026 line.
+- Kept `AGENTS.md` as the public maintenance guide and `CLAUDE.md` as a pointer.
+- Ignored local `docs/` notes.
 
-## [2026-05-13]
+## 2026-05-13
 
-### Added
-
-- Added a web app manifest at `public/manifest.json` and wired it in the head metadata.
-- Added schema.org JSON-LD `@graph` for `WebSite`, `SoftwareApplication`, and `Person`.
-- Added strict Content Security Policy metadata tailored to Nuxt runtime, Google Fonts, and GitHub API fetch needs.
-- Added sitemap generation via `@nuxtjs/sitemap`.
-
-### Changed
-
-- Enabled explicit `ssr: true` in Nuxt configuration while preserving static generation.
-- Expanded Open Graph and Twitter metadata (image dimensions, alt text, locale, and site name).
-
-### Removed
-
-- Removed stale manual `public/sitemap.xml` in favor of generated sitemap output.
+- Added manifest, sitemap generation, JSON-LD, CSP, and complete social metadata.
+- Enabled crawler-visible SSR with static generation.
+- Removed the stale manual sitemap in favor of generated output.
