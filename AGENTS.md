@@ -23,7 +23,8 @@ Public Astro landing page for SapoWhisper. Keep it static-host friendly, crawler
 
 - `src/pages/index.astro`: landing route.
 - `src/layouts/Layout.astro`: head, meta, CSP, JSON-LD, global SCSS entry.
-- `src/components/*.astro`: section components.
+- `src/components/*.astro`: section components (Hero, Engines, AISpotlight, Features, HistorySpotlight, HowItWorks, Download, Navbar, Footer).
+- `src/components/icons/*.astro`: Lucide-style SVG icons (no runtime JS). Each accepts size/class/strokeWidth props.
 - `src/styles/`: `_variables`, `_mixins`, `_base`, `_animations`, `_utilities`, `main.scss`.
 - `src/data/github.ts`: build-time fetch of latest release version.
 - `public/`: icons, manifest, robots, OG images.
@@ -45,24 +46,27 @@ Do not commit `.astro/`, `dist/`, `node_modules/`, local docs, or env files.
 
 ## Product Copy
 
-Keep copy aligned with the public app positioning:
+Keep copy aligned with the public app positioning (v2.1):
 
-- macOS menu bar dictation
-- local or cloud transcription
-- global hotkey
-- overlay while recording
-- auto-copy and auto-paste
-- transcription history
-- privacy-first workflow flexibility
+- macOS menu bar dictation, native SwiftUI, Apple Silicon + Intel
+- four engines: Apple Speech, WhisperKit (local, recommended), Google Cloud Chirp 3, Deepgram Nova-3 / Flux Live
+- AI improvement via Gemini 3.1 Flash-Lite on Vertex AI with built-in modes (Automatic, AI Assistant Prompt, Work Message, Translate to English) and custom prompts per project
+- custom vocabulary and personal context applied to every AI mode
+- global hotkey, overlay while recording, mic test, gain, auto-ducking, sound feedback
+- auto-copy and auto-paste, configurable per session
+- searchable transcript history with audio replay, pin, re-transcribe and re-polish
+- bilingual UI (Spanish / English) plus an Auto language mode
+- configuration export/import (JSON portable file)
 - open-source distribution through GitHub releases
 
 ## UI Guidelines
 
 - SCSS tokens live in `src/styles/_variables.scss`. Import with `@use "../styles/variables" as *`.
 - Preserve the emerald/green identity and restrained dark macOS app aesthetic.
-- Use existing utilities such as `.container`, `.section`, `.btn`, `.card`, `.card-glass`, `.text-gradient`.
+- Use existing utilities such as `.container`, `.section`, `.btn`, `.card-glass`, `.text-gradient`.
 - Existing responsive breakpoints are 1024px, 768px, 480px.
 - Keep animations based on `transform` and `opacity` when possible.
+- **Never use emojis as UI iconography.** Use the Lucide-style components in `src/components/icons/` (or add a new one in the same pattern). Emojis in marketing copy are also avoided unless explicitly justified.
 - Prefer editing existing components before adding new ones.
 
 ## SEO and Structured Data

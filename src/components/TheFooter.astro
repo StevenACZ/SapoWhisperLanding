@@ -1,5 +1,7 @@
 ---
 import { fetchLatestVersion } from "../data/github";
+import GitHubIcon from "./icons/GitHubIcon.astro";
+import ExternalLinkIcon from "./icons/ExternalLinkIcon.astro";
 
 const currentYear = new Date().getFullYear();
 const version = await fetchLatestVersion();
@@ -26,6 +28,8 @@ const version = await fetchLatestVersion();
       <div class="footer__columns">
         <div>
           <h4>Product</h4>
+          <a href="#engines">Engines</a>
+          <a href="#ai">AI improvement</a>
           <a href="#features">Features</a>
           <a href="#history">History</a>
           <a href="#how-it-works">Workflow</a>
@@ -37,24 +41,34 @@ const version = await fetchLatestVersion();
           <a
             href="https://github.com/StevenACZ/SapoWhisper"
             target="_blank"
-            rel="noopener noreferrer">App repository</a
+            rel="noopener noreferrer"
           >
+            <GitHubIcon size={14} class="footer__link-icon" />
+            App repository
+          </a>
           <a
             href="https://github.com/StevenACZ/SapoWhisper/releases"
             target="_blank"
-            rel="noopener noreferrer">Release notes</a
+            rel="noopener noreferrer"
           >
+            <ExternalLinkIcon size={14} class="footer__link-icon" />
+            Release notes
+          </a>
           <a
             href="https://github.com/StevenACZ/SapoWhisper/issues"
             target="_blank"
-            rel="noopener noreferrer">Issues</a
+            rel="noopener noreferrer"
           >
+            <ExternalLinkIcon size={14} class="footer__link-icon" />
+            Issues
+          </a>
         </div>
 
         <div>
           <h4>Stack</h4>
           <p class="footer__stack-list">
-            SwiftUI · WhisperKit · Deepgram · Google Cloud · SQLite History
+            SwiftUI · WhisperKit · Apple Speech · Google Cloud Chirp 3 ·
+            Deepgram Nova-3 / Flux Live · Gemini on Vertex AI · SQLite history
           </p>
         </div>
       </div>
@@ -127,8 +141,10 @@ const version = await fetchLatestVersion();
       }
 
       a {
-        display: block;
-        margin-bottom: 0.8rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        margin-bottom: 0.7rem;
         color: $neutral-400;
         transition: color $transition-fast;
 
@@ -136,6 +152,11 @@ const version = await fetchLatestVersion();
           color: $primary-300;
         }
       }
+    }
+
+    &__link-icon {
+      flex-shrink: 0;
+      opacity: 0.7;
     }
 
     &__stack-list {

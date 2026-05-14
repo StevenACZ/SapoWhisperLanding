@@ -1,7 +1,10 @@
 ---
+import GitHubIcon from "./icons/GitHubIcon.astro";
+
 const links = [
+  { href: "#engines", label: "Engines" },
+  { href: "#ai", label: "AI" },
   { href: "#features", label: "Features" },
-  { href: "#history", label: "History" },
   { href: "#how-it-works", label: "Workflow" },
   { href: "#download", label: "Download" },
 ];
@@ -36,6 +39,7 @@ const links = [
       rel="noopener noreferrer"
       class="navbar__cta"
     >
+      <GitHubIcon size={16} />
       GitHub
     </a>
 
@@ -168,13 +172,22 @@ const links = [
     }
 
     &__cta {
-      color: $neutral-300;
-      font-size: 0.92rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: $neutral-200;
+      font-size: 0.88rem;
       font-weight: 600;
-      transition: color $transition-fast;
+      transition: all $transition-fast;
 
       &:hover {
-        color: $neutral-100;
+        color: $neutral-50;
+        background: rgba(255, 255, 255, 0.07);
+        border-color: rgba(255, 255, 255, 0.15);
       }
     }
 
