@@ -119,13 +119,20 @@ const links = [
     position: fixed;
     inset: 0 0 auto;
     z-index: 1000;
-    padding: 1rem 0;
-    transition: all $transition-base;
+    padding: 0.75rem 0;
+    padding-top: max(0.75rem, env(safe-area-inset-top));
+    background: rgba(10, 10, 11, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    transition:
+      background $transition-base,
+      border-color $transition-base,
+      backdrop-filter $transition-base;
 
     &--scrolled {
-      background: rgba(10, 10, 11, 0.72);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(10, 10, 11, 0.82);
+      border-bottom-color: rgba(255, 255, 255, 0.08);
     }
 
     &__container {
@@ -133,20 +140,23 @@ const links = [
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
+      min-height: 48px;
     }
 
     &__logo {
       display: inline-flex;
       align-items: center;
-      gap: 0.75rem;
-      font-size: 1.1rem;
+      gap: 0.65rem;
+      font-size: 1.05rem;
       font-weight: 700;
+      flex-shrink: 0;
     }
 
     &__logo-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: block;
     }
 
     &__logo-text {
@@ -197,6 +207,15 @@ const links = [
       height: 40px;
       align-items: center;
       justify-content: center;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background $transition-fast;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
     }
 
     &__mobile-icon,
@@ -264,29 +283,42 @@ const links = [
       transition: max-height $transition-base;
       background: rgba(10, 10, 11, 0.94);
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 
       &.is-open {
-        max-height: 320px;
+        max-height: 360px;
       }
     }
 
     .navbar__mobile-links {
       list-style: none;
-      padding: 0 1.5rem 1.5rem;
+      padding: 0.5rem 1.5rem 1.25rem;
       display: grid;
-      gap: 0.75rem;
+      gap: 0.25rem;
     }
 
     .navbar__mobile-link {
       display: block;
       padding: 0.85rem 0;
       color: $neutral-300;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      font-weight: 500;
+
+      &:last-child {
+        border-bottom: none;
+      }
 
       &--github {
         color: $primary-300;
         font-weight: 600;
       }
+    }
+  }
+
+  @media (max-width: 640px) {
+    .navbar__logo-text {
+      font-size: 1rem;
     }
   }
 </style>
