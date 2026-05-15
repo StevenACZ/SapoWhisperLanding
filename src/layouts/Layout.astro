@@ -19,18 +19,6 @@ const { title: customTitle, description: customDescription } = Astro.props;
 const title = customTitle ?? defaultTitle;
 const description = customDescription ?? defaultDescription;
 
-const cspPolicy = [
-  "default-src 'self'",
-  "script-src 'self' 'unsafe-inline'",
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  "font-src 'self' https://fonts.gstatic.com",
-  "img-src 'self' data:",
-  "connect-src 'self' https://api.github.com",
-  "frame-ancestors 'none'",
-  "base-uri 'self'",
-  "form-action 'self'",
-].join("; ");
-
 const schemaGraph = {
   "@context": "https://schema.org",
   "@graph": [
@@ -84,7 +72,6 @@ const schemaGraph = {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <meta http-equiv="Content-Security-Policy" content={cspPolicy} />
 
     <title>{title}</title>
     <meta name="description" content={description} />
