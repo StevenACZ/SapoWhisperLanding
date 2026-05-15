@@ -1,10 +1,13 @@
 ---
+import { fetchLatestVersion } from "../data/github";
+
 interface Props {
   title?: string;
   description?: string;
 }
 
 const siteUrl = "https://sapo.stevenacz.com";
+const latestVersion = (await fetchLatestVersion()).replace(/^v/, "");
 const siteName = "SapoWhisper";
 const defaultTitle = "SapoWhisper - Native Dictation for macOS";
 const defaultDescription =
@@ -40,7 +43,7 @@ const schemaGraph = {
       operatingSystem: "macOS",
       description:
         "A native macOS menu bar dictation app with local or cloud transcription, recording overlay, auto-paste, and searchable history.",
-      softwareVersion: "Latest",
+      softwareVersion: latestVersion,
       offers: {
         "@type": "Offer",
         price: "0",
