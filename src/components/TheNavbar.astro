@@ -1,323 +1,312 @@
 ---
 import GitHubIcon from "./icons/GitHubIcon.astro";
+import DownloadIcon from "./icons/DownloadIcon.astro";
+import MenuIcon from "./icons/MenuIcon.astro";
+import CloseIcon from "./icons/CloseIcon.astro";
 
 const links = [
   { href: "#engines", label: "Engines" },
   { href: "#ai", label: "AI" },
   { href: "#features", label: "Features" },
   { href: "#how-it-works", label: "Workflow" },
-  { href: "#download", label: "Download" },
 ];
 ---
 
-<nav class="navbar" data-navbar>
-  <div class="navbar__container container">
-    <a href="#" class="navbar__logo">
+<header class="navbar" data-navbar>
+  <div class="container navbar__inner">
+    <a href="#" class="navbar__brand" aria-label="SapoWhisper home">
       <img
         src="/icons/icon_128x128.png"
-        alt="SapoWhisper Logo"
-        class="navbar__logo-icon"
+        alt=""
+        class="navbar__logo"
+        width="32"
+        height="32"
+        loading="eager"
       />
-      <span class="navbar__logo-text">SapoWhisper</span>
+      <span class="navbar__brand-text">SapoWhisper</span>
     </a>
 
-    <ul class="navbar__links">
+    <nav class="navbar__links" aria-label="Primary">
       {
         links.map((link) => (
-          <li>
-            <a href={link.href} class="navbar__link">
-              {link.label}
-            </a>
-          </li>
+          <a href={link.href} class="navbar__link">
+            {link.label}
+          </a>
         ))
       }
-    </ul>
+    </nav>
 
-    <a
-      href="https://github.com/StevenACZ/SapoWhisper"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="navbar__cta"
-    >
-      <GitHubIcon size={16} />
-      GitHub
-    </a>
+    <div class="navbar__actions">
+      <a
+        href="https://github.com/StevenACZ/SapoWhisper"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="navbar__github"
+        aria-label="View SapoWhisper on GitHub"
+      >
+        <GitHubIcon size={18} />
+        <span>GitHub</span>
+      </a>
+      <a href="#download" class="btn btn-primary navbar__download">
+        <DownloadIcon size={16} />
+        <span>Download</span>
+      </a>
+    </div>
 
     <button
-      class="navbar__mobile-btn"
-      aria-label="Open menu"
-      aria-expanded="false"
-      aria-controls="mobile-nav"
+      type="button"
+      class="navbar__toggle"
       data-mobile-toggle
+      aria-label="Toggle navigation"
+      aria-expanded="false"
     >
-      <span class="navbar__mobile-icon" data-mobile-icon></span>
+      <span class="navbar__toggle-icon navbar__toggle-icon--open">
+        <MenuIcon size={22} />
+      </span>
+      <span class="navbar__toggle-icon navbar__toggle-icon--close">
+        <CloseIcon size={22} />
+      </span>
     </button>
   </div>
 
-  <div id="mobile-nav" class="navbar__mobile-menu" data-mobile-menu>
-    <ul class="navbar__mobile-links">
+  <div class="navbar__mobile" data-mobile-menu>
+    <nav class="navbar__mobile-links" aria-label="Mobile primary">
       {
         links.map((link) => (
-          <li>
-            <a href={link.href} class="navbar__mobile-link" data-mobile-link>
-              {link.label}
-            </a>
-          </li>
+          <a href={link.href} class="navbar__mobile-link" data-mobile-link>
+            {link.label}
+          </a>
         ))
       }
-      <li>
-        <a
-          href="https://github.com/StevenACZ/SapoWhisper"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="navbar__mobile-link navbar__mobile-link--github"
-        >
-          View on GitHub
-        </a>
-      </li>
-    </ul>
+    </nav>
+    <div class="navbar__mobile-actions">
+      <a
+        href="https://github.com/StevenACZ/SapoWhisper"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn-secondary"
+      >
+        <GitHubIcon size={18} />
+        <span>View on GitHub</span>
+      </a>
+      <a href="#download" class="btn btn-primary" data-mobile-link>
+        <DownloadIcon size={18} />
+        <span>Download for macOS</span>
+      </a>
+    </div>
   </div>
-</nav>
+</header>
 
 <script>
-  const navbar = document.querySelector<HTMLElement>("[data-navbar]");
-  const toggleBtn = document.querySelector<HTMLButtonElement>(
+  const toggle = document.querySelector<HTMLButtonElement>(
     "[data-mobile-toggle]",
   );
-  const icon = document.querySelector<HTMLElement>("[data-mobile-icon]");
-  const menu = document.querySelector<HTMLElement>("[data-mobile-menu]");
-  const links = document.querySelectorAll<HTMLAnchorElement>("[data-mobile-link]");
+  const menu = document.querySelector<HTMLDivElement>("[data-mobile-menu]");
+  const navbar = document.querySelector<HTMLElement>("[data-navbar]");
+  const links = document.querySelectorAll<HTMLAnchorElement>(
+    "[data-mobile-link]",
+  );
 
-  if (navbar) {
-    const onScroll = () => {
-      navbar.classList.toggle("navbar--scrolled", window.scrollY > 24);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
+  function setOpen(open: boolean) {
+    if (!toggle || !menu) return;
+    toggle.setAttribute("aria-expanded", String(open));
+    menu.classList.toggle("is-open", open);
+    document.body.classList.toggle("is-menu-open", open);
   }
 
-  const setOpen = (open: boolean) => {
-    if (!toggleBtn || !icon || !menu) return;
-    toggleBtn.setAttribute("aria-expanded", String(open));
-    toggleBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-    icon.classList.toggle("is-open", open);
-    menu.classList.toggle("is-open", open);
-  };
-
-  toggleBtn?.addEventListener("click", () => {
-    const open = toggleBtn.getAttribute("aria-expanded") === "true";
-    setOpen(!open);
+  toggle?.addEventListener("click", () => {
+    const isOpen = toggle.getAttribute("aria-expanded") === "true";
+    setOpen(!isOpen);
   });
 
   links.forEach((link) => link.addEventListener("click", () => setOpen(false)));
+
+  function onScroll() {
+    navbar?.classList.toggle("is-scrolled", window.scrollY > 8);
+  }
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
 </script>
 
 <style lang="scss">
   @use "../styles/variables" as *;
+  @use "../styles/mixins" as *;
 
   .navbar {
     position: fixed;
-    inset: 0 0 auto;
-    z-index: 1000;
-    padding: 0.75rem 0;
-    padding-top: max(0.75rem, env(safe-area-inset-top));
-    background: rgba(10, 10, 11, 0.88);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    padding-top: env(safe-area-inset-top);
+    background: rgba(8, 9, 12, 0.55);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border-bottom: 1px solid transparent;
     transition:
       background $transition-base,
       border-color $transition-base;
 
-    &--scrolled {
-      background: rgba(10, 10, 11, 0.95);
-      border-bottom-color: rgba(255, 255, 255, 0.1);
+    &.is-scrolled {
+      background: rgba(8, 9, 12, 0.82);
+      border-bottom-color: rgba(255, 255, 255, 0.06);
     }
 
-    &__container {
+    &__inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
-      min-height: 48px;
+      height: 72px;
+      gap: $spacing-lg;
+    }
+
+    &__brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: $neutral-50;
+      font-weight: 700;
     }
 
     &__logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.65rem;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+    }
+
+    &__brand-text {
       font-size: 1.05rem;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    &__logo-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      display: block;
-    }
-
-    &__logo-text {
-      color: $neutral-100;
+      letter-spacing: -0.01em;
     }
 
     &__links {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 1.5rem;
-      list-style: none;
+      gap: $spacing-md;
     }
 
     &__link {
-      color: $neutral-400;
-      font-size: 0.95rem;
+      padding: $spacing-sm $spacing-md;
+      color: $neutral-300;
+      font-size: 0.92rem;
       font-weight: 500;
-      transition: color $transition-fast;
-
-      &:hover {
-        color: $neutral-100;
-      }
-    }
-
-    &__cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      padding: 0.5rem 0.9rem;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: $neutral-200;
-      font-size: 0.88rem;
-      font-weight: 600;
-      transition: all $transition-fast;
+      border-radius: $radius-md;
+      transition:
+        color $transition-fast,
+        background $transition-fast;
 
       &:hover {
         color: $neutral-50;
-        background: rgba(255, 255, 255, 0.07);
-        border-color: rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.04);
       }
     }
 
-    &__mobile-btn {
+    &__actions {
+      display: inline-flex;
+      align-items: center;
+      gap: $spacing-sm;
+    }
+
+    &__github {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem $spacing-md;
+      border-radius: $radius-md;
+      color: $neutral-200;
+      font-size: 0.92rem;
+      font-weight: 600;
+      transition:
+        color $transition-fast,
+        background $transition-fast;
+
+      &:hover {
+        color: $neutral-50;
+        background: rgba(255, 255, 255, 0.05);
+      }
+    }
+
+    &__download {
+      padding: 0.55rem 1rem;
+      font-size: 0.92rem;
+    }
+
+    &__toggle {
       display: none;
       width: 40px;
       height: 40px;
-      align-items: center;
-      justify-content: center;
+      border-radius: $radius-md;
+      color: $neutral-100;
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 10px;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      transition: background $transition-fast;
 
-      &:hover {
-        background: rgba(255, 255, 255, 0.08);
+      .navbar__toggle-icon--close {
+        display: none;
+      }
+
+      &[aria-expanded="true"] {
+        .navbar__toggle-icon--open {
+          display: none;
+        }
+        .navbar__toggle-icon--close {
+          display: inline-flex;
+        }
       }
     }
 
-    &__mobile-icon,
-    &__mobile-icon::before,
-    &__mobile-icon::after {
-      width: 20px;
-      height: 2px;
-      border-radius: 999px;
-      background: $neutral-100;
-      transition: all $transition-fast;
-    }
-
-    &__mobile-icon {
-      position: relative;
-    }
-
-    &__mobile-icon::before,
-    &__mobile-icon::after {
-      content: "";
-      position: absolute;
-      left: 0;
-    }
-
-    &__mobile-icon::before {
-      top: -6px;
-    }
-
-    &__mobile-icon::after {
-      top: 6px;
-    }
-
-    &__mobile-icon.is-open {
-      background: transparent;
-    }
-
-    &__mobile-icon.is-open::before {
-      top: 0;
-      transform: rotate(45deg);
-    }
-
-    &__mobile-icon.is-open::after {
-      top: 0;
-      transform: rotate(-45deg);
-    }
-
-    &__mobile-menu {
+    &__mobile {
       display: none;
-    }
-  }
-
-  @media (max-width: 900px) {
-    .navbar__links,
-    .navbar__cta {
-      display: none;
-    }
-
-    .navbar__mobile-btn {
-      display: inline-flex;
-    }
-
-    .navbar__mobile-menu {
-      display: block;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height $transition-base;
-      background: rgba(10, 10, 11, 0.94);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      flex-direction: column;
+      gap: $spacing-md;
+      padding: $spacing-lg;
+      background: rgba(8, 9, 12, 0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
 
       &.is-open {
-        max-height: 360px;
+        display: flex;
       }
     }
 
-    .navbar__mobile-links {
-      list-style: none;
-      padding: 0.5rem 1.5rem 1.25rem;
-      display: grid;
-      gap: 0.25rem;
+    &__mobile-links {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-xs;
     }
 
-    .navbar__mobile-link {
-      display: block;
-      padding: 0.85rem 0;
-      color: $neutral-300;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-      font-weight: 500;
+    &__mobile-link {
+      padding: 0.85rem $spacing-md;
+      border-radius: $radius-md;
+      color: $neutral-100;
+      font-weight: 600;
 
-      &:last-child {
-        border-bottom: none;
+      &:hover {
+        background: rgba(255, 255, 255, 0.04);
       }
+    }
 
-      &--github {
-        color: $primary-300;
-        font-weight: 600;
-      }
+    &__mobile-actions {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-sm;
     }
   }
 
-  @media (max-width: 640px) {
-    .navbar__logo-text {
-      font-size: 1rem;
+  @include below-lg {
+    .navbar__links {
+      display: none;
+    }
+
+    .navbar__actions {
+      display: none;
+    }
+
+    .navbar__toggle {
+      display: inline-flex;
     }
   }
 </style>
