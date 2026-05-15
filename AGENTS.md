@@ -79,7 +79,7 @@ Keep copy aligned with the public app positioning (v2.1):
 
 ## Verification
 
-Before finishing a task, run:
+Run before finishing any task:
 
 ```bash
 bun run format:check
@@ -87,16 +87,9 @@ bun run typecheck
 bun run build
 ```
 
-For SEO work, inspect generated `dist/index.html` for:
-
-- `application/ld+json`
-- description and Open Graph metadata
-- CSP meta tag
-- valid `manifest.json`
-- valid `sitemap-index.xml`
-- real social preview image
+For SEO work, inspect `dist/index.html` for: `application/ld+json`, description + OG, CSP meta, manifest, sitemap-index, real OG image.
 
 ## Git Safety
 
-- Use conventional commits.
-- Do not use destructive git operations unless explicitly requested.
+- Conventional commits, incremental commits on a feature branch — never one big squash.
+- No destructive git operations unless explicitly requested.
