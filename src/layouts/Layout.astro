@@ -11,16 +11,29 @@ const latestVersion = (await fetchLatestVersion()).replace(/^v/, "");
 const siteName = "SapoWhisper";
 const defaultTitle = "SapoWhisper - Native Dictation for macOS";
 const defaultDescription =
-  "A macOS menu bar app for fast dictation. Trigger recording with a shortcut, transcribe with local or cloud engines, paste instantly, and keep everything in History.";
+  "Free macOS menu bar dictation app with Option+Space recording, local WhisperKit or cloud transcription, Gemini text polish, auto-paste, and searchable history.";
 const ogDescription =
-  "Trigger recording from anywhere, transcribe with the engine you prefer, paste instantly, and revisit every transcript later.";
+  "Trigger recording from anywhere, transcribe locally with WhisperKit or through Apple, Google Cloud, and Deepgram, then polish and paste instantly.";
 const twitterDescription =
-  "Fast dictation for macOS with global hotkeys, local or cloud engines, auto-paste, and searchable history.";
-const ogImage = `${siteUrl}/og-image-20260513.png`;
+  "Free macOS dictation with global hotkeys, local or cloud engines, AI text polish, auto-paste, and searchable history.";
+const ogImage = `${siteUrl}/og-image-20260518.png`;
 
 const { title: customTitle, description: customDescription } = Astro.props;
 const title = customTitle ?? defaultTitle;
 const description = customDescription ?? defaultDescription;
+
+const cspPolicy = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline'",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src 'self' https://fonts.gstatic.com",
+  "img-src 'self' data:",
+  "connect-src 'self' https://api.github.com",
+  "frame-ancestors 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "object-src 'none'",
+].join("; ");
 
 const schemaGraph = {
   "@context": "https://schema.org",
@@ -31,7 +44,7 @@ const schemaGraph = {
       url: `${siteUrl}/`,
       name: siteName,
       description:
-        "Native dictation for macOS with menu bar controls, global shortcuts, and flexible transcription engines.",
+        "Free macOS dictation app with menu bar controls, global shortcuts, local WhisperKit transcription, cloud engines, AI text polish, and searchable transcript history.",
       inLanguage: "en",
       publisher: { "@id": `${siteUrl}/#person` },
     },
@@ -40,10 +53,13 @@ const schemaGraph = {
       "@id": `${siteUrl}/#software`,
       name: siteName,
       applicationCategory: "ProductivityApplication",
-      operatingSystem: "macOS",
+      operatingSystem: "macOS 14.0+",
       description:
-        "A native macOS menu bar dictation app with local or cloud transcription, recording overlay, auto-paste, and searchable history.",
+        "A native macOS menu bar dictation app for privacy-minded voice typing. Record with Option+Space, transcribe locally with WhisperKit or through Apple Speech, Google Cloud Chirp 3, and Deepgram Nova-3, polish text with Gemini, auto-paste into any app, and search transcript history.",
       softwareVersion: latestVersion,
+      softwareRequirements: "Apple Silicon or Intel Mac running macOS 14 or later",
+      downloadUrl: "https://github.com/StevenACZ/SapoWhisper/releases/latest",
+      isAccessibleForFree: true,
       offers: {
         "@type": "Offer",
         price: "0",
@@ -56,6 +72,17 @@ const schemaGraph = {
         "https://github.com/StevenACZ/SapoWhisper/releases",
       ],
       url: `${siteUrl}/`,
+      keywords:
+        "macOS dictation, free dictation app, voice typing for Mac, local WhisperKit, Deepgram dictation, Google Cloud Chirp 3, Gemini text polish, auto-paste, transcript history",
+      featureList: [
+        "Global Option+Space recording shortcut",
+        "Local WhisperKit transcription",
+        "Apple Speech, Google Cloud Chirp 3, and Deepgram Nova-3 engine support",
+        "Gemini-powered text refinement modes",
+        "Auto-paste into the active macOS app",
+        "Searchable transcript history",
+        "Bring your own Google Cloud and Deepgram API keys",
+      ],
     },
     {
       "@type": "Person",
@@ -75,12 +102,13 @@ const schemaGraph = {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    <meta http-equiv="Content-Security-Policy" content={cspPolicy} />
 
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta
       name="keywords"
-      content="macOS dictation, voice typing mac, speech to text macOS, menu bar dictation, mac transcription app, whisper macOS, voice workflow"
+      content="SapoWhisper, free macOS dictation app, voice typing for Mac, speech to text macOS, menu bar dictation, local WhisperKit, Google Cloud Chirp 3, Deepgram Nova-3, Gemini text polish, auto-paste dictation, transcript history, bring your own API keys"
     />
     <meta name="author" content="StevenACZ" />
     <meta
@@ -98,8 +126,8 @@ const schemaGraph = {
     <meta property="og:locale" content="en_US" />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:alt" content="SapoWhisper landing preview" />
-    <meta property="og:image:width" content="1024" />
-    <meta property="og:image:height" content="1024" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -112,6 +140,12 @@ const schemaGraph = {
     <link rel="canonical" href={`${siteUrl}/`} />
     <link rel="manifest" href="/manifest.json" />
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+    <link
+      rel="alternate"
+      type="text/markdown"
+      title="AI-readable SapoWhisper summary"
+      href="/llms.txt"
+    />
 
     <!-- Icons -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
