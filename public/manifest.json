@@ -31,5 +31,14 @@
       "sizes": "16x16",
       "type": "image/png"
     }
+  ],
+  "screenshots": [
+    {
+      "src": "/og-image-20260518.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "SapoWhisper macOS dictation preview"
+    }
   ]
 }
